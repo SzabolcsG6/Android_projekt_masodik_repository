@@ -1,0 +1,87 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white">
+
+        <!-- ImageView for logo -->
+
+        <!-- TextView for the message -->
+
+        <!-- Button -->
+        <ImageView
+                android:id="@+id/logo"
+                android:layout_width="196dp"
+                android:layout_height="191dp"
+                android:src="@drawable/logo"
+                android:scaleType="centerCrop"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="100dp"
+                android:layout_marginStart="104dp"/>
+
+        <!-- First row: Welcome -->
+
+        <!-- Second row: to -->
+
+        <!-- Third row: The Recipes App -->
+
+        <TextView
+                android:id="@+id/welcomeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Welcome"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/logo"
+                android:layout_marginStart="144dp"
+                android:layout_marginTop="48dp"/>
+        <TextView
+                android:id="@+id/toText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="to"
+                android:textStyle="italic"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/welcomeText"
+                android:layout_marginStart="188dp"
+                android:layout_marginTop="36dp"/>
+        <TextView
+                android:id="@+id/recipesAppText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="The Recipes App"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toText"
+                android:layout_marginStart="104dp"
+                android:layout_marginTop="40dp"/>
+        <!-- EditText -->
+
+        <EditText
+                android:id="@+id/editText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Enter your text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/recipesAppText"
+                android:layout_marginStart="144dp"
+                android:layout_marginTop="28dp"/>
+        <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Click Me"
+                app:layout_constraintStart_toStartOf="parent" tools:layout_editor_absoluteY="621dp"
+                android:layout_marginStart="152dp"
+                android:background="#00FF00"/>
+
+        <!-- Other layout elements -->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

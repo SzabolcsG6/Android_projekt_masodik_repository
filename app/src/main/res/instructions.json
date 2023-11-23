@@ -1,0 +1,40 @@
+{
+  "instructions": [
+    {
+      "appliance": null,
+      "end_time": 26500,
+      "temperature": null,
+      "id": 43381,
+      "position": 1,
+      "display_text": "In a blender or food processor, combine the yogurt, lime juice, pepper, and chili powder and pulse to combine. Add ½ of the avocado and blend until creamy.",
+      "start_time": 7000
+    },
+    {
+      "start_time": 29000,
+      "appliance": null,
+      "end_time": 43500,
+      "temperature": null,
+      "id": 43382,
+      "position": 2,
+      "display_text": "In a medium bowl, combine the chicken, yogurt sauce, celery, the remaining ½ avocado, onion, and salt. Mix until well combined."
+    },
+    {
+      "id": 43383,
+      "position": 3,
+      "display_text": "Serve on low-carb bread and garnish with cilantro, or as desired.",
+      "start_time": 0,
+      "appliance": null,
+      "end_time": 0,
+      "temperature": null
+    },
+    {
+      "appliance": null,
+      "end_time": 47166,
+      "temperature": null,
+      "id": 43384,
+      "position": 4,
+      "display_text": "Enjoy!",
+      "start_time": 44666
+    }
+  ]
+}
