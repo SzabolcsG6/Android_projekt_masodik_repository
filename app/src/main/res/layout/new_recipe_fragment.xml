@@ -1,6 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                   android:layout_width="match_parent"
-                                                   android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <!-- Title -->
+            <TextView
+                    android:text="Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            <EditText
+                    android:id="@+id/titleEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            <!-- Description -->
+            <TextView
+                    android:text="Description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            <EditText
+                    android:id="@+id/descriptionEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            <!-- Picture URL -->
+            <TextView
+                    android:text="Picture URL"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            <EditText
+                    android:id="@+id/pictureURLEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            <!-- Video URL -->
+            <TextView
+                    android:text="Video URL"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            <EditText
+                    android:id="@+id/videoURLEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            <!-- Ingredients -->
+            <TextView
+                    android:text="Ingredients"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            <!-- Ingredient 1 -->
+            <EditText
+                    android:id="@+id/ingredient1EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            <!-- Ingredient 2 -->
+            <EditText
+                    android:id="@+id/ingredient2EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            <!-- Ingredient 3 -->
+            <EditText
+                    android:id="@+id/ingredient3EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            <!-- Instructions -->
+            <TextView
+                    android:text="Instructions"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            <!-- Instruction 1 -->
+            <EditText
+                    android:id="@+id/instruction1EditText"
+                    android:hint="Enter instruction #1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            <!-- Instruction 2 -->
+            <EditText
+                    android:id="@+id/instruction2EditText"
+                    android:hint="Enter instruction #2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            <!-- Instruction 3 -->
+            <EditText
+                    android:id="@+id/instruction3EditText"
+                    android:hint="Enter instruction #3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            <!-- Save Button -->
+            <Button
+                    android:id="@+id/saveButton"
+                    android:text="Save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
