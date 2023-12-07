@@ -1,4 +1,4 @@
-package com.tasty.recipesapp.data.dtos
+package com.tasty.recipesapp.dtos
 
 import com.google.gson.annotations.SerializedName
 

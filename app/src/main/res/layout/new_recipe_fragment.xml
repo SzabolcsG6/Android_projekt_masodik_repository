@@ -17,6 +17,7 @@
             <!-- Title -->
             <TextView
                     android:text="Title"
+                    android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -28,6 +29,7 @@
             <!-- Description -->
             <TextView
                     android:text="Description"
+                    android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -39,6 +41,7 @@
             <!-- Picture URL -->
             <TextView
                     android:text="Picture URL"
+                    android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -50,6 +53,7 @@
             <!-- Video URL -->
             <TextView
                     android:text="Video URL"
+                    android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -59,27 +63,30 @@
                     android:layout_height="wrap_content" />
 
             <!-- Ingredients -->
+
+            <!-- Ingredient 1 -->
             <TextView
                     android:text="Ingredients"
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-            <!-- Ingredient 1 -->
+                    android:layout_height="wrap_content"/>
             <EditText
                     android:id="@+id/ingredient1EditText"
+                    android:hint="Enter ingredient #1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
             <!-- Ingredient 2 -->
             <EditText
                     android:id="@+id/ingredient2EditText"
+                    android:hint="Enter ingredient #2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
             <!-- Ingredient 3 -->
             <EditText
                     android:id="@+id/ingredient3EditText"
+                    android:hint="Enter ingredient #3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 

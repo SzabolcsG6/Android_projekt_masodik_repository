@@ -1,6 +1,6 @@
 package com.tasty.recipesapp.activities
 
-import com.tasty.recipesapp.data.dtos.InstructionDTO
+import com.tasty.recipesapp.dtos.InstructionDTO
 import com.tasty.recipesapp.data.models.InstructionModel
 import com.tasty.recipesapp.data.models.InstructionTime
 
