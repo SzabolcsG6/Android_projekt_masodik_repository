@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "recipes")
-data class recipeEntity(
+data class RecipeEntity(
     @PrimaryKey val id: String, // Assuming id is a string
     val name: String,
     val imageUrl: String,

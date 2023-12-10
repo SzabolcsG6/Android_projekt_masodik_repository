@@ -1,8 +1,8 @@
 package com.tasty.recipesapp.activities
 
 import com.tasty.recipesapp.dtos.InstructionDTO
-import com.tasty.recipesapp.data.models.InstructionModel
-import com.tasty.recipesapp.data.models.InstructionTime
+import com.tasty.recipesapp.models.InstructionModel
+import com.tasty.recipesapp.models.InstructionTime
 
 object Mapping {
     fun InstructionDTO.toModel(): InstructionModel {

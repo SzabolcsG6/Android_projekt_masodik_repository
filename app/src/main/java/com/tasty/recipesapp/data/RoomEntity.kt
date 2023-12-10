@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "recipe")
-data class RecipeEntity(
+data class RoomEntity(
     @PrimaryKey(autoGenerate = true)
     val internalId: Long = 0L, // Room will handle generating this ID
     @SerializedName("json_data")

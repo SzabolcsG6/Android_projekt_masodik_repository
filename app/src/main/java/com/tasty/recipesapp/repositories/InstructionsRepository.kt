@@ -5,7 +5,7 @@ import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.tasty.recipesapp.dtos.InstructionDTO
-import com.tasty.recipesapp.data.models.InstructionModel
+import com.tasty.recipesapp.models.InstructionModel
 import com.tasty.recipesapp.activities.Mapping.toModelList
 import org.json.JSONObject
 import java.io.IOException

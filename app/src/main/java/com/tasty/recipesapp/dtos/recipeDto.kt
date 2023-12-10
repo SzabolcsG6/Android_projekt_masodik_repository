@@ -1,6 +1,6 @@
 package com.tasty.recipesapp.dtos
 
-import com.tasty.recipesapp.data.models.InstructionModel
+import com.tasty.recipesapp.models.InstructionModel
 
 data class RecipesDto(
     val instructions: List<InstructionModel>

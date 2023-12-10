@@ -1,4 +1,4 @@
-package com.tasty.recipesapp.data.models
+package com.tasty.recipesapp.models
 
 data class InstructionModel(
     val id: Int,
