@@ -10,15 +10,15 @@ import com.tasty.recipesapp.providers.RepositoryProvider
 class RecipeListViewModel : ViewModel() {
 
     // LiveData to hold the list of InstructionModels
-    // This should be changed to recipes
-    private val _instructionModels = MutableLiveData<List<InstructionModel>>()
-    val instructionModels: LiveData<List<InstructionModel>> = _instructionModels
+    // This should be recipes
+    private val recipes = MutableLiveData<List<InstructionModel>>()
+    val instructionModels: LiveData<List<InstructionModel>> = recipes
 
     // Function to load data from the repository
     // Context should be removed
     fun loadInstructionData(context: Context) {
         val data = RepositoryProvider.instructionsRepository.getAll(context)
-        _instructionModels.value = data
+        recipes.value = data
     }
     fun recipeDto.toModel(): RecipeListViewModel {
         // Perform the necessary transformation from recipeDto to RecipeListViewModel

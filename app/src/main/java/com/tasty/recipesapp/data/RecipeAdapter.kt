@@ -3,7 +3,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.tasty.recipesapp.models.RecipeViewModel
 
- paramaterkent megkapja a listener-t, amit a fragment-ben kezelunk le
+ //paramaterkent megkapja a listener-t, amit a fragment-ben kezelunk le
 class RecipeAdapter(private var listener: OnItemClickListener) : RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
 
 
