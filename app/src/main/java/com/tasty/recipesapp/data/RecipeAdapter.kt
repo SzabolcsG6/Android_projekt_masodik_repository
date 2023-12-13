@@ -28,14 +28,14 @@ class RecipeAdapter(private var listener: OnItemClickListener) : RecyclerView.Ad
              val position = adapterPosition
              if (position != RecyclerView.NO_POSITION) {
 				//innen fogja tudni, hogy mi az id
-                 listener.onItemClick(recipes[position].id)
+                // listener.onItemClick(recipes[position].id)
              }
          }
     }
 
 	fun setData(list: List<Recipe>) {
-        recipes.clear()
-        recipes.addAll(list!!)
+       // recipes.clear()
+       // recipes.addAll(list!!)
         notifyDataSetChanged()
     }
 
