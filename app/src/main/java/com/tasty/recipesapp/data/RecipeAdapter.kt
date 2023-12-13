@@ -1,12 +1,14 @@
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.tasty.recipesapp.R
 import com.tasty.recipesapp.dtos.Recipe
 
 //paramaterkent megkapja a listener-t, amit a fragment-ben kezelunk le
 class RecipeAdapter(private var listener: OnItemClickListener) : RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
 
-
+    private val recipes: MutableList<Recipe> = mutableListOf()
     interface OnItemClickListener {
         fun onItemClick(id: Int)
     }
@@ -16,6 +18,13 @@ class RecipeAdapter(private var listener: OnItemClickListener) : RecyclerView.Ad
 		//Vigyazat!!! Ez nem ugyanaz, mint az altalunk megadott interface, ez az alap OnClick
 
 		//....
+        fun bind(recipe: Recipe) {
+            // Bind data to views here, for example:
+            itemView.setOnClickListener {
+                listener.onItemClick(recipe.id)
+            }
+            // Set other views with recipe details using recipe properties
+        }
 
 
         init {
@@ -34,24 +43,30 @@ class RecipeAdapter(private var listener: OnItemClickListener) : RecyclerView.Ad
     }
 
 	fun setData(list: List<Recipe>) {
-       // recipes.clear()
-       // recipes.addAll(list!!)
+        recipes.clear()
+       recipes.addAll(list!!)
         notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
-        TODO("Not yet implemented")
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.recipe_detail_fragment, parent, false)
+        return RecipeViewHolder(itemView)
     }
+
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        // Return the size of your data list
+        return recipes.size
     }
+
 
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        val currentRecipe = recipes[position]
+        // Bind data to views in the ViewHolder
+        holder.bind(currentRecipe)
     }
 
-    //.....
+
 
 }
 

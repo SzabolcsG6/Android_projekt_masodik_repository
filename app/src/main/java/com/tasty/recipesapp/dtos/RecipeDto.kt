@@ -5,7 +5,7 @@ import android.nfc.Tag
 import androidx.core.view.KeyEventDispatcher
 
 data class RecipeDto(
-    val id: Int,
+    val id: String,
     val name: String,
     val nutrition: NutritionDTO,
     val credits: List<CreditDTO>,
@@ -14,8 +14,28 @@ data class RecipeDto(
     val components: List<ComponentDTO>,
     val tags: List<TagDTO>,
     val topics: List<TopicDTO>,
-    val userRatings: List<UserRatingDTO>
+    val userRatings: List<UserRatingDTO>,
+    val thumbnailUrl: String,
+    val promotion: String?,
+    val originalVideoUrl: String?,
+    val servingsNounPlural: String?,
+    val videoAdContent: String?,
+    val seoTitle: String?,
+    val seoPath: String?,
+    val canonicalId: String?,
+    val beautyUrl: String?,
+    val draftStatus: String?,
+    val aspectRatio: String?,
+    val difficultyLevel: String?,
+    val cuisineType: String?,
+    val dietaryInformation: String?,
+    val mealType: String?,
+    val calories: Int?,
+    val nutritionalInfo: String?,
+    val allergens: String?,
+    val  imageUrL: String
 )
+
 
 data class Recipe(
     val id: Int,

@@ -20,13 +20,29 @@ class RecipeListViewModel : ViewModel() {
         val data = RepositoryProvider.instructionsRepository.getAll(context)
         recipes.value = data
     }
-    fun RecipeDto.toModel(): RecipeListViewModel {
+    fun RecipeDto.toModel(): RecipeModel {
         // Perform the necessary transformation from recipeDto to RecipeListViewModel
-        return RecipeListViewModel(
-         //   id = this.id,
-          //  name = this.name,
-            //thumbnailUrl = this.thumbnail_url,
-            // Add other required attributes
-        )
+        return RecipeModel(
+           id = this.id,
+            name = this.name,
+            thumbnailUrl = this.thumbnailUrl,
+            promotion = this.promotion,
+            originalVideoUrl = this.originalVideoUrl,
+            servingsNounPlural = this.servingsNounPlural,
+            videoAdContent = this.videoAdContent,
+            seoTitle = this.seoTitle,
+            seoPath = this.seoPath,
+            canonicalId = this.canonicalId,
+            beautyUrl = this.beautyUrl,
+            draftStatus = this.draftStatus,
+            aspectRatio = this.aspectRatio,
+            difficultyLevel = this.difficultyLevel,
+            cuisineType = this.cuisineType,
+            dietaryInformation = this.dietaryInformation,
+            mealType = this.mealType,
+            calories = this.calories,
+            nutritionalInfo = this.nutritionalInfo,
+            allergens = this.allergens,
+        imageUrl=this.imageUrL)
     }
 }

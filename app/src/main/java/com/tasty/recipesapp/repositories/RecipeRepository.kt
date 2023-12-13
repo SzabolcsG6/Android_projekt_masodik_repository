@@ -13,14 +13,15 @@ class RecipeRepository(private val recipeDao: RecipeDao) {
 
     suspend fun insertRecipe(recipe: RecipeEntity) {
         recipeDao.insertRecipe(recipe)
+
     }
 
-    suspend fun getAllRecipes(): List<RecipeDto> {
-        return recipeDao.getAllRecipes().map { recipeEntity ->
-            val jsonObject = JSONObject(recipeEntity.json)
-            jsonObject.put("id", recipeEntity.id)
-            gson.fromJson(jsonObject.toString(), RecipeDto::class.java).toModel()
-        }
-    }
+    //suspend fun getAllRecipes(): List<RecipeDto> {
+       // return recipeDao.getAllRecipes().map { recipeEntity ->
+            //val jsonObject = JSONObject(RecipeEntity.json)
+           // jsonObject.put("id", RecipeEntity.id)
+           // gson.fromJson(jsonObject.toString(), RecipeDto::class.java).toModel()
+       // }
+   // }
 }
 
