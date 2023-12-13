@@ -14,7 +14,7 @@
         <!-- Define other fragments and connections between them as needed -->
         <activity
                 android:id="@+id/splashActivity"
-                android:name="com.example.yourapp.SplashActivity"
+                android:name="com.tasty.recipesapp.activities.SplashActivity"
                 android:label="Splash Activity">
                 <action
                         android:id="@+id/action_splash_to_main"
@@ -31,10 +31,16 @@
                 android:name="com.tasty.recipesapp.ui.recipe.RecipesFragment"
                 android:label="Recipes Fragment"
                 tools:layout="@layout/recipes_fragment" />
-
+        <action
+            android:id="@+id/action_recipesFragment_to_recipeDetailFragment"
+            app:destination="@id/recipeDetailFragment">
+                <argument
+                    android:name="recipeId"
+                    app:argType="integer" />
+        </action>
         <fragment
                 android:id="@+id/recipeDetailFragment"
-                android:name="com.tasty.recipesapp.utils.ui.recipe.RecipeDetailFragment"
+                android:name="com.tasty.recipesapp.ui.recipe.RecipeDetailFragment"
                 android:label="Recipe Detail Fragment"
                 tools:layout="@layout/recipe_detail_fragment" />
 
@@ -45,7 +51,6 @@
                 tools:layout="@layout/profile_fragment" />
 
         <!-- Connection between RecipesFragment and RecipeDetailFragment -->
-        <action
-                android:id="@+id/action_recipes_to_recipeDetail"
-                app:destination="@id/recipeDetailFragment" />
+
+
 </navigation>

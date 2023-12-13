@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "448096469450",
+    "project_id": "recipes-app-5d591",
+    "storage_bucket": "recipes-app-5d591.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:448096469450:android:de69523466d71b1f6ecf33",
+        "android_client_info": {
+          "package_name": "com.tasty.recipesapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9MrdIwQYlrdvbni9ID8HcMDH8ldjFfTs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

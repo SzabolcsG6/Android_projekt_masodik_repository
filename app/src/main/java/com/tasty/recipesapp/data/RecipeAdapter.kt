@@ -2,6 +2,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.tasty.recipesapp.models.RecipeViewModel
+import com.tasty.recipesapp.models.RecipeListViewModel
 
  //paramaterkent megkapja a listener-t, amit a fragment-ben kezelunk le
 class RecipeAdapter(private var listener: OnItemClickListener) : RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
