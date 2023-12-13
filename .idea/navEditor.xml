@@ -8,9 +8,21 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
-                  <entry key="action_recipes_to_recipeDetail">
+                  <entry key="action_recipesFragment_to_recipeDetailFragment">
                     <value>
                       <LayoutPositions />
+                    </value>
+                  </entry>
+                  <entry key="addEditRecipeFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-18" />
+                            <option name="y" value="209" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
                     </value>
                   </entry>
                   <entry key="homeFragment">
@@ -25,25 +37,13 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="mainActivity">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="-666" />
-                            <option name="y" value="208" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
                   <entry key="profileFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-438" />
-                            <option name="y" value="529" />
+                            <option name="x" value="-452" />
+                            <option name="y" value="505" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -69,27 +69,6 @@
                             <option name="x" value="-446" />
                             <option name="y" value="208" />
                           </Point>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="splashActivity">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="-884" />
-                            <option name="y" value="198" />
-                          </Point>
-                        </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_splash_to_main">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
                         </option>
                       </LayoutPositions>
                     </value>

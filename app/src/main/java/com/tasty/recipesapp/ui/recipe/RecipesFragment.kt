@@ -1,27 +1,23 @@
 package com.tasty.recipesapp.ui.recipe
 
 import RecipeAdapter
-import android.os.Build.VERSION_CODES.R
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.tasty.recipesapp.R
 import com.tasty.recipesapp.databinding.RecipesFragmentBinding
 import com.tasty.recipesapp.models.RecipeViewModel
+import com.tasty.recipesapp.R
 
 class RecipesFragment : Fragment(), RecipeAdapter.OnItemClickListener {
 
     private lateinit var binding: RecipesFragmentBinding
     private val recipeAdapter = RecipeAdapter(this)
     private val recipeViewModel: RecipeViewModel by lazy {
-        ViewModelProvider(this).get(RecipeViewModel::class.java)
+        ViewModelProvider(this)[RecipeViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -44,7 +40,7 @@ class RecipesFragment : Fragment(), RecipeAdapter.OnItemClickListener {
 
         binding.newRecipeButton.setOnClickListener {
 
-            findNavController().navigate(R.id.action_recipesFragment_to_addEditRecipeFragment)
+            findNavController().navigate(R.id.action_recipesFragment_to_addNewRecipeFragment)
         }
     }
 
@@ -61,8 +57,11 @@ override fun onItemClick(id: Int) {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        // Release the binding when the fragment's view is destroyed to avoid memory leaks
-        binding = null
+        // Release resources held by the binding without setting it to null
+        binding.unbind()
+        // Perform additional cleanup if necessary
+        // ...
     }
+
 }
 
