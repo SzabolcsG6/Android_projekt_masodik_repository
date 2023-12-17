@@ -70,30 +70,30 @@ class RecipeViewModel : ViewModel() {
         val filteredRecipes = currentRecipes.filter { it.type == type }
         _recipeList.value = filteredRecipes
     }
-    private fun transformToRecipeModel(recipe: RecipeEntity): RecipeModel {
-        return RecipeModel(
-            id = recipe.id,
-            name = recipe.name,
-            imageUrl = recipe.imageUrl,
-            thumbnailUrl = recipe.thumbnailAltUrl,
-            promotion = recipe.promotion,
-            originalVideoUrl = recipe.originalVideoUrl,
-            servingsNounPlural = recipe.servingsNounPlural,
-            videoAdContent = recipe.videoAdContent,
-            seoTitle = recipe.seoTitle,
-            seoPath = recipe.seoPath,
-            canonicalId = recipe.canonicalId,
-            beautyUrl = recipe.beautyUrl,
-            draftStatus = recipe.draftStatus,
-            aspectRatio = recipe.aspectRatio,
-            difficultyLevel = recipe.difficultyLevel,
-            cuisineType = recipe.cuisineType,
-            dietaryInformation = recipe.dietaryInformation,
-            mealType = recipe.mealType,
-            calories = recipe.calories,
-            nutritionalInfo = recipe.nutritionalInfo,
-            allergens = recipe.allergens
-        )
-    }
+//    private fun transformToRecipeModel(recipe: RecipeEntity): RecipeModel {
+//        return RecipeModel(
+//            id = recipe.id,
+//            name = recipe.name,
+//            imageUrl = recipe.imageUrl,
+//            thumbnailUrl = recipe.thumbnailAltUrl,
+//            promotion = recipe.promotion,
+//            originalVideoUrl = recipe.originalVideoUrl,
+//            servingsNounPlural = recipe.servingsNounPlural,
+//            videoAdContent = recipe.videoAdContent,
+//            seoTitle = recipe.seoTitle,
+//            seoPath = recipe.seoPath,
+//            canonicalId = recipe.canonicalId,
+//            beautyUrl = recipe.beautyUrl,
+//            draftStatus = recipe.draftStatus,
+//            aspectRatio = recipe.aspectRatio,
+//            difficultyLevel = recipe.difficultyLevel,
+//            cuisineType = recipe.cuisineType,
+//            dietaryInformation = recipe.dietaryInformation,
+//            mealType = recipe.mealType,
+//            calories = recipe.calories,
+//            nutritionalInfo = recipe.nutritionalInfo,
+//            allergens = recipe.allergens
+//        )
+//    }
 
 }

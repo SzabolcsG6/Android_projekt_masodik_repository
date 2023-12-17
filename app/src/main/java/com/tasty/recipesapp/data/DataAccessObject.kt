@@ -1,5 +1,6 @@
 package com.tasty.recipesapp.data
 
+import com.tasty.recipesapp.data.RecipeEntity
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -9,7 +10,7 @@ import androidx.room.Query
 interface RecipeDao {
     @Insert
     suspend fun insertRecipe(recipe: RecipeEntity)
-    @Query("SELECT * FROM recipe WHERE internalId = :id")
+    @Query("SELECT * FROM recipe WHERE id = :id")
     suspend fun getRecipeById(id: Long): RecipeEntity?
     @Query("SELECT * FROM recipe")
     suspend fun getAllRecipes(): List<RecipeEntity>

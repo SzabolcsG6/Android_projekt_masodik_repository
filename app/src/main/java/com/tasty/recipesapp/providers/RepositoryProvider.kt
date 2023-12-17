@@ -26,5 +26,5 @@ object RepositoryProvider {
     }
 
     val instructionsRepository: InstructionsRepository = InstructionsRepository()
-    //val recipeRepository: RecipeRepository = RecipeRepository()
+    //val recipeRepository: RecipeRepository = RecipeRepository(recipeDao)
 }

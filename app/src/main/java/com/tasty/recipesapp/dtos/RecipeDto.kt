@@ -7,14 +7,14 @@ import androidx.core.view.KeyEventDispatcher
 data class RecipeDto(
     val id: String,
     val name: String,
-    val nutrition: NutritionDTO,
-    val credits: List<CreditDTO>,
-    val instructions: List<InstructionDTO>,
-    val sections: List<SectionDTO>,
-    val components: List<ComponentDTO>,
-    val tags: List<TagDTO>,
-    val topics: List<TopicDTO>,
-    val userRatings: List<UserRatingDTO>,
+    val nutrition: Nutrition?,
+    val credits: List<Credit>,
+    val instructions: List<Instruction>,
+    val sections: List<Section>,
+    val components: List<Component>,
+    val tags: List<com.tasty.recipesapp.dtos.Tag>,
+    val topics: List<com.tasty.recipesapp.dtos.Topic>,
+    val userRatings: List<UserRating>,
     val thumbnailUrl: String,
     val promotion: String?,
     val originalVideoUrl: String?,
@@ -33,7 +33,7 @@ data class RecipeDto(
     val calories: Int?,
     val nutritionalInfo: String?,
     val allergens: String?,
-    val  imageUrL: String
+    val imageUrl: String
 )
 
 
@@ -97,7 +97,7 @@ data class Component(
     val id: Int,
     val name: String,
     val quantity: Double,
-    val measurement: Measurement
+    val measurement: Measurement?
 )
 
 data class TagDTO(

@@ -42,11 +42,14 @@ class RecipeAdapter(private var listener: OnItemClickListener) : RecyclerView.Ad
          }
     }
 
-	fun setData(list: List<Recipe>) {
-        recipes.clear()
-       recipes.addAll(list!!)
-        notifyDataSetChanged()
+    fun setData(list: List<Recipe>?) {
+        list?.let {
+            recipes.clear()
+            recipes.addAll(it)
+            notifyDataSetChanged()
+        }
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.recipe_detail_fragment, parent, false)
