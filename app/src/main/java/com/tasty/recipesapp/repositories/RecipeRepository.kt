@@ -1,3 +1,5 @@
+package com.tasty.recipesapp.repositories
+
 import android.content.Context
 import com.google.gson.Gson
 import com.tasty.recipesapp.data.RecipeDao
@@ -19,15 +21,16 @@ import java.io.IOException
 import com.tasty.recipesapp.dtos.Unit
 class RecipeRepository(
     private val recipeDao: RecipeDao,
-    private val applicationContext: Context // Pass the Context here
+    private val context: Context
 ) {
     private val gson = Gson()
     private var _recipes: List<RecipeDto> = emptyList()
 
+
     suspend fun loadRecipesFromJson(): List<RecipeDto> {
         return withContext(Dispatchers.IO) {
             try {
-                val inputStream = applicationContext.assets.open("all_recipes.json")
+                val inputStream = context.assets.open("all_recipes.json")
                 val size = inputStream.available()
                 val buffer = ByteArray(size)
                 inputStream.read(buffer)
@@ -77,9 +80,9 @@ class RecipeRepository(
         for (i in 0 until instructionsArray.length()) {
             val instructionObject = instructionsArray.getJSONObject(i)
             val id = instructionObject.optInt("id", 0)
-            val appliance = instructionObject.optString("appliance", null)
+            val appliance = instructionObject.optString("appliance", null.toString())
             val endTime = instructionObject.optInt("endTime", 0)
-            val temperature = instructionObject.optString("temperature", null)
+            val temperature = instructionObject.optString("temperature", null.toString())
             val position = instructionObject.optInt("position", 0)
             val displayText = instructionObject.optString("displayText", "")
             val startTime = instructionObject.optInt("startTime", 0)

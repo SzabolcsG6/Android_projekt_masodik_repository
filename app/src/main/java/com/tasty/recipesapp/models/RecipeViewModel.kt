@@ -4,10 +4,14 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.tasty.recipesapp.data.RecipeEntity
 import com.tasty.recipesapp.dtos.Recipe
+import com.tasty.recipesapp.dtos.RecipeDto
+import com.tasty.recipesapp.repositories.RecipeRepository
+import kotlinx.coroutines.launch
 import java.io.IOException
 data class RecipeModel(
     val id: String,
@@ -34,66 +38,35 @@ data class RecipeModel(
 )
 
 
-class RecipeViewModel : ViewModel() {
-    private val _recipeList = MutableLiveData<List<Recipe>>() // Define LiveData for recipes
-    val recipeList: LiveData<List<Recipe>> get() = _recipeList // Expose LiveData
+class RecipeViewModel(private val recipeRepository: RecipeRepository) : ViewModel() {
+    private val _recipeList = MutableLiveData<List<RecipeDto>>()
+    val recipeList: LiveData<List<RecipeDto>> get() = _recipeList
 
-    fun readAllRecipes(context: Context) {
-        val jsonString = loadJsonFromAssets(context, "all_recipes.json") // Load JSON file
-        val recipeList = parseJsonToRecipes(jsonString) // Parse JSON to list of Recipe objects
-        _recipeList.value = recipeList // Set the value of LiveData
-    }
-
-    private fun loadJsonFromAssets(context: Context, fileName: String): String {
-        return try {
-            val inputStream = context.assets.open(fileName)
-            val size = inputStream.available()
-            val buffer = ByteArray(size)
-            inputStream.read(buffer)
-            inputStream.close()
-            String(buffer)
-        } catch (ioException: IOException) {
-            ioException.printStackTrace()
-            ""
+    fun loadRecipes(context: Context) {
+        viewModelScope.launch {
+            try {
+                val recipes = recipeRepository.loadRecipesFromJson()
+                _recipeList.value = recipes
+            } catch (e: IOException) {
+                // Handle file loading error: Display error message or return default value
+                e.printStackTrace()
+                // For example:
+                _recipeList.value = emptyList()
+            }
         }
     }
 
-    private fun parseJsonToRecipes(jsonString: String): List<Recipe> {
-        val gson = Gson()
-        val listType = object : TypeToken<List<Recipe>>() {}.type
-        return gson.fromJson(jsonString, listType)
-    }
 
-    // Filter recipes based on the provided type
-    fun filterRecipesByType(type: String) {
+    fun filterRecipesById(id: String) {
         val currentRecipes = _recipeList.value.orEmpty()
-        val filteredRecipes = currentRecipes.filter { it.type == type }
+        val filteredRecipes = currentRecipes.filter { it.id == id }
         _recipeList.value = filteredRecipes
     }
-//    private fun transformToRecipeModel(recipe: RecipeEntity): RecipeModel {
-//        return RecipeModel(
-//            id = recipe.id,
-//            name = recipe.name,
-//            imageUrl = recipe.imageUrl,
-//            thumbnailUrl = recipe.thumbnailAltUrl,
-//            promotion = recipe.promotion,
-//            originalVideoUrl = recipe.originalVideoUrl,
-//            servingsNounPlural = recipe.servingsNounPlural,
-//            videoAdContent = recipe.videoAdContent,
-//            seoTitle = recipe.seoTitle,
-//            seoPath = recipe.seoPath,
-//            canonicalId = recipe.canonicalId,
-//            beautyUrl = recipe.beautyUrl,
-//            draftStatus = recipe.draftStatus,
-//            aspectRatio = recipe.aspectRatio,
-//            difficultyLevel = recipe.difficultyLevel,
-//            cuisineType = recipe.cuisineType,
-//            dietaryInformation = recipe.dietaryInformation,
-//            mealType = recipe.mealType,
-//            calories = recipe.calories,
-//            nutritionalInfo = recipe.nutritionalInfo,
-//            allergens = recipe.allergens
-//        )
-//    }
+    fun filterRecipesByName(name: String) {
+        val currentRecipes = _recipeList.value.orEmpty()
+        val filteredRecipes = currentRecipes.filter { it.name == name }
+        _recipeList.value = filteredRecipes
+    }
 
 }
+

@@ -1,3 +1,5 @@
+package com.tasty.recipesapp.activities
+
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -7,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.tasty.recipesapp.databinding.ActivitySplashBinding // Import the generated binding class
 import com.tasty.recipesapp.R
 import com.tasty.recipesapp.activities.MainActivity
+import com.tasty.recipesapp.providers.RepositoryProvider
 
 class SplashActivity : AppCompatActivity() {
     private val tag = "com.tasty.recipesapp.utils.activities.SplashActivity"
@@ -17,7 +20,7 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        RepositoryProvider.initialize(this)
         // Simulate a delay before navigating to MainActivity
         Handler().postDelayed({
             navigateToMainActivity()

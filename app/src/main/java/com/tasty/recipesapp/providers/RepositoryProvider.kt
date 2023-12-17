@@ -9,14 +9,16 @@ import com.tasty.recipesapp.repositories.RecipeRepository
 
 object RepositoryProvider {
     private lateinit var recipeDao: RecipeDao
+    private lateinit var appContext: Context // Define the Context variable
 
     fun initialize(context: Context) {
+        appContext = context // Assign the received context to appContext
         recipeDao = RecipeDatabase.getDatabase(context).recipeDao()
     }
 
     val recipeRepository: RecipeRepository by lazy {
         checkInitialized()
-        RecipeRepository(recipeDao)
+        RecipeRepository(recipeDao, appContext) // Pass the appContext when creating RecipeRepository
     }
 
     private fun checkInitialized() {
@@ -26,5 +28,4 @@ object RepositoryProvider {
     }
 
     val instructionsRepository: InstructionsRepository = InstructionsRepository()
-    //val recipeRepository: RecipeRepository = RecipeRepository(recipeDao)
 }

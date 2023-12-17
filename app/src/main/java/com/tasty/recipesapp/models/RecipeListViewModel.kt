@@ -43,6 +43,6 @@ class RecipeListViewModel : ViewModel() {
             calories = this.calories,
             nutritionalInfo = this.nutritionalInfo,
             allergens = this.allergens,
-        imageUrl=this.imageUrL)
+        imageUrl=this.imageUrl)
     }
 }
