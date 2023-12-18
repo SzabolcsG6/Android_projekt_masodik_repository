@@ -1,131 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#A88550"
+    tools:context=".ui.recipe.NewRecipeFragment">
+
+    <TextView
+        android:id="@+id/title_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="25dp"
+        android:text="Add New Recipe"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/recipe_name_input"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Name"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_view"
+        tools:ignore="Autofill,LabelFor" />
 
-    <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="16dp">
+    <EditText
+        android:id="@+id/recipe_description_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Description"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recipe_name_input"
+        tools:ignore="Autofill,LabelFor" />
 
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+    <EditText
+        android:id="@+id/recipe_image_url_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="120dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Image URL"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.842"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recipe_description_input"
+        tools:ignore="Autofill,LabelFor" />
 
-            <!-- Title -->
-            <TextView
-                    android:text="Title"
-                    android:textStyle="bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-            <EditText
-                    android:id="@+id/titleEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            <!-- Description -->
-            <TextView
-                    android:text="Description"
-                    android:textStyle="bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-            <EditText
-                    android:id="@+id/descriptionEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            <!-- Picture URL -->
-            <TextView
-                    android:text="Picture URL"
-                    android:textStyle="bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-            <EditText
-                    android:id="@+id/pictureURLEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            <!-- Video URL -->
-            <TextView
-                    android:text="Video URL"
-                    android:textStyle="bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-            <EditText
-                    android:id="@+id/videoURLEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            <!-- Ingredients -->
-
-            <!-- Ingredient 1 -->
-            <TextView
-                    android:text="Ingredients"
-                    android:textStyle="bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            <EditText
-                    android:id="@+id/ingredient1EditText"
-                    android:hint="Enter ingredient #1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            <!-- Ingredient 2 -->
-            <EditText
-                    android:id="@+id/ingredient2EditText"
-                    android:hint="Enter ingredient #2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            <!-- Ingredient 3 -->
-            <EditText
-                    android:id="@+id/ingredient3EditText"
-                    android:hint="Enter ingredient #3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            <!-- Instructions -->
-            <TextView
-                    android:text="Instructions"
-                    android:textStyle="bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-            <!-- Instruction 1 -->
-            <EditText
-                    android:id="@+id/instruction1EditText"
-                    android:hint="Enter instruction #1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            <!-- Instruction 2 -->
-            <EditText
-                    android:id="@+id/instruction2EditText"
-                    android:hint="Enter instruction #2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            <!-- Instruction 3 -->
-            <EditText
-                    android:id="@+id/instruction3EditText"
-                    android:hint="Enter instruction #3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            <!-- Save Button -->
-            <Button
-                    android:id="@+id/saveButton"
-                    android:text="Save"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-        </LinearLayout>
-    </ScrollView>
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recipe_image_url_input"
+        app:layout_constraintVertical_bias="0.95" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

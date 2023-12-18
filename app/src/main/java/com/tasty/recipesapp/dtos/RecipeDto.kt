@@ -3,166 +3,44 @@ package com.tasty.recipesapp.dtos
 import android.adservices.topics.Topic
 import android.nfc.Tag
 import androidx.core.view.KeyEventDispatcher
+import com.tasty.recipesapp.models.RecipeModel
+import com.tasty.recipesapp.models.TotalTimeModel
 
 data class RecipeDto(
-    val id: String,
-    val name: String,
-    val nutrition: Nutrition?,
-    val credits: List<Credit>,
-    val instructions: List<Instruction>,
-    val sections: List<Section>,
-    val components: List<Component>,
-    val tags: List<com.tasty.recipesapp.dtos.Tag>,
-    val topics: List<com.tasty.recipesapp.dtos.Topic>,
-    val userRatings: List<UserRating>,
-    val thumbnailUrl: String,
-    val promotion: String?,
-    val originalVideoUrl: String?,
-    val servingsNounPlural: String?,
-    val videoAdContent: String?,
-    val seoTitle: String?,
-    val seoPath: String?,
-    val canonicalId: String?,
-    val beautyUrl: String?,
-    val draftStatus: String?,
-    val aspectRatio: String?,
-    val difficultyLevel: String?,
-    val cuisineType: String?,
-    val dietaryInformation: String?,
-    val mealType: String?,
-    val calories: Int?,
-    val nutritionalInfo: String?,
-    val allergens: String?,
-    val imageUrl: String
-)
-
-
-data class Recipe(
     val id: Int,
     val name: String,
-    val type: String,
-    val nutrition: Nutrition,
-    val credits: List<Credit>,
-    val instructions: List<Instruction>,
-    val sections: List<Section>,
-    val components: List<KeyEventDispatcher.Component>,
-    val tags: List<Tag>,
-    val topics: List<Topic>,
-    val userRatings: List<UserRating>
+    val description: String? = "Default description",
+    val aspect_ratio: String,
+    val user_ratings: UserRatingsDto,
+    val thumbnail_url: String,
+    val total_time_tier: TotalTimeDto,
+    val instructions: List<InstructionDto>
 )
 
-data class NutritionDTO(
-    val calories: Int,
-    val fat: Int,
-    val protein: Int,
-    val carbohydrates: Int
-)
 
-data class Nutrition(
-    val calories: Int,
-    val fat: Int,
-    val protein: Int,
-    val carbohydrates: Int
-)
+fun RecipeDto.toModel(): RecipeModel {
+    return RecipeModel(
+        id = this.id,
+        name = this.name,
+        description = this.description ?: "Default description",
+        aspect_ratio = this.aspect_ratio,
+        thumbnailUrl = this.thumbnail_url,
+        userRatings = this.user_ratings.toModel(),
+        total_time_tier = this.total_time_tier?.toModel() ?: TotalTimeModel.default(), // Handle null case
+        instructions = this.instructions.toModelList()
+    )
+}
 
-data class CreditDTO(
-    val name: String,
-    val role: String
-)
+fun TotalTimeDto?.toModel(): TotalTimeModel {
+    // Check for null and return a default TotalTimeModel if null
+    return this?.let {
+        // Convert TotalTimeDTO to TotalTimeModel here
+        // Replace this block with your actual conversion logic
+        // Example:
+        TotalTimeModel(/* pass relevant parameters */)
+    } ?: TotalTimeModel.default() // Return default TotalTimeModel if null
+}
 
-data class Credit(
-    val name: String,
-    val role: String
-)
-data class SectionDTO(
-    val id: Int,
-    val title: String,
-    val description: String
-)
-
-data class Section(
-    val id: Int,
-    val title: String,
-    val description: String
-)
-
-data class ComponentDTO(
-    val id: Int,
-    val name: String,
-    val quantity: Double,
-    val measurement: MeasurementDTO
-)
-
-data class Component(
-    val id: Int,
-    val name: String,
-    val quantity: Double,
-    val measurement: Measurement?
-)
-
-data class TagDTO(
-    val id: Int,
-    val name: String
-)
-
-data class Tag(
-    val id: Int,
-    val name: String
-)
-
-data class TopicDTO(
-    val id: Int,
-    val title: String,
-    val description: String
-)
-
-data class Topic(
-    val id: Int,
-    val title: String,
-    val description: String
-)
-
-data class UserRatingDTO(
-    val userId: Int,
-    val rating: Int
-)
-
-data class UserRating(
-    val userId: Int,
-    val rating: Int
-)
-
-data class Instruction(
-    val id: Int,
-    val appliance: String?,
-    val endTime: Int,
-    val temperature: String?,
-    val position: Int,
-    val displayText: String,
-    val startTime: Int
-)
-data class MeasurementDTO(
-    val id: Int,
-    val unit: UnitDTO,
-    val quantity: Double
-)
-
-data class Measurement(
-    val id: Int,
-    val unit: Unit,
-    val quantity: Double
-)
-
-data class UnitDTO(
-    val id: Int,
-    val name: String,
-    val symbol: String
-)
-
-data class Unit(
-    val id: Int,
-    val name: String,
-    val symbol: String
-)
-
-// Similarly, create DTO and Model classes for other entities such as Instruction, Section, Component, Ingredient, Measurement, Unit, Tag, Topic, and UserRatings following a similar structure and mapping.
+fun List<RecipeDto>.toModelList(): List<RecipeModel> {
+    return this.map { it.toModel() }
+}

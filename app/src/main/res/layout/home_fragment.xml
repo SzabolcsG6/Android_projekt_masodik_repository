@@ -1,7 +1,59 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                   android:layout_width="match_parent"
-                                                   android:layout_height="match_parent"
-                                                   android:background="@drawable/bg_dark">
 
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.HomeFragment">
+
+    <TextView
+        android:text="Welcome"
+        android:layout_width="wrap_content"
+        android:textSize="28dp"
+        android:textStyle="bold"
+        android:layout_height="wrap_content" android:id="@+id/welcometext1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" app:layout_constraintVertical_bias="0.39"/>
+    <ImageView
+        android:src="@drawable/recipes"
+        android:background="@drawable/round_corners"
+        android:layout_width="164dp"
+        android:layout_height="164dp"
+        android:id="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" app:layout_constraintVertical_bias="0.100000024"
+        />
+    <TextView
+        android:text="to the RecipeApp"
+        android:layout_width="wrap_content"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:layout_height="wrap_content" android:id="@+id/welcometext2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" app:layout_constraintVertical_bias="0.49"/>
+    <TextView
+        android:text="Where you can find the best recipes and cooking tips to enjoy a culinary experience"
+        android:layout_width="300dp"
+        android:textStyle="italic"
+        android:textAlignment="center"
+        android:layout_height="58dp" android:id="@+id/welcometext3"
+        app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.59000003"/>
+
+    <Button
+        android:id="@+id/welcomebutton"
+        android:layout_width="160dp"
+        android:layout_height="48dp"
+        android:background="@drawable/round_corners"
+        android:text="Get Started"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.77" />
 </androidx.constraintlayout.widget.ConstraintLayout>

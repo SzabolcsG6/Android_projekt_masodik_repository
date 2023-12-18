@@ -1,77 +1,85 @@
 package com.tasty.recipesapp.data
+import android.content.ContentValues
+import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.tasty.recipesapp.R
+import com.bumptech.glide.Glide
+
 import com.tasty.recipesapp.dtos.RecipeDto
+import com.tasty.recipesapp.models.RecipeModel
 
-//paramaterkent megkapja a listener-t, amit a fragment-ben kezelunk le
-class RecipeAdapter(private var listener: OnItemClickListener) : RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
 
-    private val recipes: MutableList<RecipeDto> = mutableListOf()
+class RecipesListAdapter (
+    private var recipesList: List<RecipeModel>,
+    private val context: Context,
+    private val onItemClickListener: (RecipeModel) -> Unit,
+    private val onItemLongClickListener: (RecipeModel) -> Unit = {},
+) : RecyclerView.Adapter<RecipesListAdapter.RecipeItemViewHolder>() {
 
-    interface OnItemClickListener {
-        fun onItemClick(id: String)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeItemViewHolder {
+        val binding = RecipeListItemBinding
+            .inflate(LayoutInflater.from(context), parent, false)
+        return RecipeItemViewHolder(binding)
     }
 
-    inner class RecipeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
-        // ...
-        //implementalja a View.OnClickListener-t
-		//Vigyazat!!! Ez nem ugyanaz, mint az altalunk megadott interface, ez az alap OnClick
+    override fun getItemCount(): Int = recipesList.size
 
-		//....
-        fun bind(recipe: RecipeDto) {
-            itemView.setOnClickListener {
-                listener.onItemClick(recipe.id)
-            }
-            // Set other views with recipe details using recipe properties
-        }
+    override fun onBindViewHolder(holder: RecipeItemViewHolder, position: Int) {
+        val currentRecipe = recipesList[position]
 
+        holder.recipeTitleView.text = currentRecipe.name
+        holder.recipeDescriptionView.text = currentRecipe.description
+
+        Log.d(ContentValues.TAG, "Recipe's thumbnail URL: ${currentRecipe.thumbnailUrl}")
+        //Download image from url
+        Glide.with(context)
+            .load(currentRecipe.thumbnailUrl)
+            .centerCrop()
+            .placeholder(R.drawable.ic_launcher_background)
+            .fallback(R.drawable.ic_launcher_background)
+            .into(holder.recipeImageView)
+
+        val ratingsLabel = context.getString(R.string.user_ratings_label)
+        holder.recipeRatingsView.text = ratingsLabel
+            .plus(" ")
+            .plus(currentRecipe.userRatings.score)
+    }
+
+    /**
+     * Update the list.
+     */
+    fun setData(newList: List<RecipeModel>) {
+        recipesList = newList
+    }
+
+    inner class RecipeItemViewHolder(binding: RecipeListItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        val recipeTitleView: TextView = binding.recipeItemTitleView
+        val recipeDescriptionView: TextView = binding.recipeItemDescriptionView
+        val recipeImageView : ImageView = binding.recipeImageView
+        val recipeRatingsView: TextView = binding.recipeRatingsView
 
         init {
-			//listener beallitasa
-            itemView.setOnClickListener(this)
-        }
+            binding.root.setOnClickListener {
+                val currentPosition = this.adapterPosition
+                val currentRecipe = recipesList[currentPosition]
 
-		// implementacio, ahol megadjuk a mi sajat listener-unknek, hogy mi lesz a recipe ID.
-         override fun onClick(view: View) {
-             val position = adapterPosition
-             if (position != RecyclerView.NO_POSITION) {
-				//innen fogja tudni, hogy mi az id
-                 listener.onItemClick(recipes[position].id)
-             }
-         }
-    }
+                onItemClickListener(currentRecipe)
+            }
 
-    fun setData(list: List<RecipeDto>) {
-        list?.let {
-            recipes.clear()
-            recipes.addAll(it)
-            notifyDataSetChanged()
+            binding.root.setOnLongClickListener {
+                val currentPosition = this.adapterPosition
+                val currentRecipe = recipesList[currentPosition]
+
+                onItemLongClickListener(currentRecipe)
+                true
+            }
         }
     }
-
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.recipe_detail_fragment, parent, false)
-        return RecipeViewHolder(itemView)
-    }
-
-
-    override fun getItemCount(): Int {
-        // Return the size of your data list
-        return recipes.size
-    }
-
-
-    override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
-        val currentRecipe = recipes[position]
-        // Bind data to views in the ViewHolder
-        holder.bind(currentRecipe)
-    }
-
-
-
 }
-

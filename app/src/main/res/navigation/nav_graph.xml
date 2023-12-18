@@ -1,74 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph"
+    xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph"
     app:startDestination="@id/homeFragment">
 
-        <!-- Define fragments -->
-        <fragment
-            android:id="@+id/homeFragment"
+        <activity android:id="@+id/splashActivity"
+            android:name="com.tasty.recipesapp.activities.SplashActivity"
+            android:label="activity_splash"
+            tools:layout="@layout/activity_splash"/>
+
+
+
+        <fragment android:id="@+id/homeFragment"
             android:name="com.tasty.recipesapp.ui.home.HomeFragment"
-            android:label="Home Fragment"
-            tools:layout="@layout/home_fragment" />
+            android:label="fragment_home"
+            tools:layout="@layout/home_fragment">
 
-        <!-- Define other fragments -->
-        <fragment
-            android:id="@+id/recipesFragment"
-            android:name="com.tasty.recipesapp.ui.recipe.RecipesFragment"
-            android:label="Recipes Fragment"
-            tools:layout="@layout/recipes_fragment" />
-        <fragment
-            android:id="@+id/profileFragment"
+                <action android:id="@+id/action_homeFragment_to_profileFragment"
+                    app:destination="@id/profileFragment"/>
+                <action android:id="@+id/action_homeFragment_to_recipesFragment"
+                    app:destination="@id/recipesFragment"/>
+        </fragment>
+        <fragment android:id="@+id/profileFragment"
             android:name="com.tasty.recipesapp.ui.profile.ProfileFragment"
-            android:label="Profile Fragment"
-            tools:layout="@layout/profile_fragment" />
-        <fragment
-            android:id="@+id/recipeDetailFragment"
+            android:label="fragment_profile"
+            tools:layout="@layout/profile_fragment">
+                <action android:id="@+id/action_profileFragment_to_recipeDetailFragment"
+                    app:destination="@id/recipeDetailFragment"/>
+                <action android:id="@+id/action_profileFragment_to_newRecipeFragment" app:destination="@id/newRecipeFragment"/>
+        </fragment>
+        <fragment android:id="@+id/recipeDetailFragment"
             android:name="com.tasty.recipesapp.ui.recipe.RecipeDetailFragment"
-            android:label="Recipe Detail Fragment"
-            tools:layout="@layout/recipe_detail_fragment" />
+            android:label="fragment_recipe_detail" tools:layout="@layout/recipe_detail_fragment"/>
+        <fragment android:id="@+id/recipesFragment" android:name="com.tasty.recipesapp.ui.recipe.RecipeDetailFragment"
+            android:label="fragment_recipes" tools:layout="@layout/recipes_fragment">
+                <action android:id="@+id/action_recipesFragment_to_recipeDetailFragment"
+                    app:destination="@id/recipeDetailFragment"/>
+        </fragment>
+        <activity android:id="@+id/mainActivity"
+            android:name="com.tasty.recipesapp.activities.MainActivity"
+            android:label="fragment_recipes"
+            tools:layout="@layout/activity_main"/>
         <fragment
-            android:id="@+id/addNewRecipeFragment"
+            android:id="@+id/newRecipeFragment"
             android:name="com.tasty.recipesapp.ui.recipe.NewRecipeFragment"
-            android:label="Add/Edit Recipe Fragment"
-            tools:layout="@layout/new_recipe_fragment" />
-        <!-- Define argument outside of action -->
-
-
-        <!-- Define connections between fragments -->
-        <action
-            android:id="@+id/action_recipesFragment_to_recipeDetailFragment"
-            app:destination="@id/recipeDetailFragment" />
-
-        <!-- Add other connections or actions as needed -->
-        <action
-            android:id="@+id/action_homeFragment_to_recipesFragment"
-            app:destination="@id/recipesFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
-
-        <action
-            android:id="@+id/action_profileFragment_to_recipesFragment"
-            app:destination="@id/recipesFragment" />
-        <action
-            android:id="@+id/action_profileFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-
-        <action
-            android:id="@+id/action_recipesFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
-
-        <action
-            android:id="@+id/action_recipesFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-
-        <action
-            android:id="@+id/action_recipesFragment_to_addNewRecipeFragment"
-            app:destination="@id/addNewRecipeFragment" />
-
-        <!-- Additional actions for ProfileFragment -->
-
-
+            android:label="fragment_new_recipe"
+            tools:layout="@layout/new_recipe_fragment"/>
 
 </navigation>

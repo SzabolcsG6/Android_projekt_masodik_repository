@@ -3,28 +3,40 @@ package com.tasty.recipesapp.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.navigation.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
 import com.tasty.recipesapp.R
+import com.tasty.recipesapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        val navView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
-        navView.nextFocusUpId = R.id.bottomNavigationView
+        //setContentView(R.layout.activity_main)
 
-        //val navController = this.findNavController(R.id.myNavHostFragment)
-      //  val navView: BottomNavigationView = binding.bottomNavigationView
-        //navView.setupWithNavController(navController)
 
-    }
-    private fun goToSplashActivity() {
-        val intent = Intent(this, SplashActivity::class.java)
-        startActivity(intent)
-        finish() // Optional: Finish MainActivity to prevent it from stacking upon SplashActivity
-    }
-    override fun onBackPressed() {
-        super.onBackPressed()
-        goToSplashActivity()
+        val binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.bottomNavigation.setOnItemSelectedListener(NavigationBarView.OnItemSelectedListener {
+            when(it.itemId){
+                R.id.homeFragment -> {
+                    findNavController(R.id.nav_host_fragment).navigate(R.id.homeFragment)
+                    return@OnItemSelectedListener true
+                }
+                R.id.recipesFragment -> {
+                    findNavController(R.id.nav_host_fragment).navigate(R.id.recipesFragment)
+                    return@OnItemSelectedListener true
+
+                }
+                R.id.profileFragment -> {
+                    findNavController(R.id.nav_host_fragment).navigate(R.id.profileFragment)
+                    return@OnItemSelectedListener true
+                }
+                else -> true
+            }
+        })
+
+
     }
 }

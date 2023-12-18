@@ -12,50 +12,24 @@ import com.tasty.recipesapp.activities.MainActivity
 import com.tasty.recipesapp.providers.RepositoryProvider
 
 class SplashActivity : AppCompatActivity() {
-    private val tag = "com.tasty.recipesapp.utils.activities.SplashActivity"
-    private val splashTimeout = 2000 // 2000 milliseconds (2 seconds)
-    private lateinit var binding: ActivitySplashBinding // Declare binding variable
-
+    companion object {
+        private const val TAG = "SplashActivity"
+    }
+    private val SPLASH_TIME_OUT: Long = 2000 // 2 seconds
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySplashBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        RepositoryProvider.initialize(this)
-        // Simulate a delay before navigating to MainActivity
-        Handler().postDelayed({
-            navigateToMainActivity()
-        }, splashTimeout.toLong())
+        setContentView(R.layout.activity_splash)
+        val handler = Handler()
+        handler.postDelayed(
+            {
+                // Navigate to MainActivity after the delay
+                val intent = Intent(this@SplashActivity, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            },
+            SPLASH_TIME_OUT
+        )
     }
 
-    private fun navigateToMainActivity() {
-        val intent = Intent(this@SplashActivity, MainActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
 
-    // Additional lifecycle methods with logging for demonstration
-    override fun onStart() {
-        super.onStart()
-        Log.d(tag, "onStart: com.tasty.recipesapp.utils.activities.SplashActivity started.")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d(tag, "onResume: com.tasty.recipesapp.utils.activities.SplashActivity resumed.")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.d(tag, "onPause: com.tasty.recipesapp.utils.activities.SplashActivity paused.")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.d(tag, "onStop: com.tasty.recipesapp.utils.activities.SplashActivity stopped.")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d(tag, "onDestroy: com.tasty.recipesapp.utils.activities.SplashActivity destroyed.")
-    }
 }

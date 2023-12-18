@@ -4,45 +4,30 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.tasty.recipesapp.dtos.RecipeDto
 import com.tasty.recipesapp.providers.RepositoryProvider
+import com.tasty.recipesapp.repositories.RecipeRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class RecipeListViewModel : ViewModel() {
+internal class RecipeListViewModel : ViewModel() {
 
-    // LiveData to hold the list of InstructionModels
-    // This should be recipes
-    private val recipes = MutableLiveData<List<InstructionModel>>()
-    val instructionModels: LiveData<List<InstructionModel>> = recipes
+    val repository = RecipeRepository
 
-    // Function to load data from the repository
-    // Context should be removed
-    fun loadInstructionData(context: Context) {
-        val data = RepositoryProvider.instructionsRepository.getAll(context)
-        recipes.value = data
-    }
-    fun RecipeDto.toModel(): RecipeModel {
-        // Perform the necessary transformation from recipeDto to RecipeListViewModel
-        return RecipeModel(
-           id = this.id,
-            name = this.name,
-            thumbnailUrl = this.thumbnailUrl,
-            promotion = this.promotion,
-            originalVideoUrl = this.originalVideoUrl,
-            servingsNounPlural = this.servingsNounPlural,
-            videoAdContent = this.videoAdContent,
-            seoTitle = this.seoTitle,
-            seoPath = this.seoPath,
-            canonicalId = this.canonicalId,
-            beautyUrl = this.beautyUrl,
-            draftStatus = this.draftStatus,
-            aspectRatio = this.aspectRatio,
-            difficultyLevel = this.difficultyLevel,
-            cuisineType = this.cuisineType,
-            dietaryInformation = this.dietaryInformation,
-            mealType = this.mealType,
-            calories = this.calories,
-            nutritionalInfo = this.nutritionalInfo,
-            allergens = this.allergens,
-        imageUrl=this.imageUrl)
+    val recipeList: MutableLiveData<List<RecipeModel>> =
+        MutableLiveData()
+
+    private val _searchResults: MutableLiveData<List<RecipeModel>> = MutableLiveData()
+    val searchResults: LiveData<List<RecipeModel>> get() = _searchResults
+
+    fun getAllRecipesFromApi (){
+        viewModelScope.launch {
+            val recipes = withContext(Dispatchers.IO){
+                repository.getRecipeFromApi("0", "50")
+            }
+            recipeList.value = recipes
+        }
     }
 }

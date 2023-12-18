@@ -4,63 +4,85 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.tasty.recipesapp.databinding.RecipesFragmentBinding
-import com.tasty.recipesapp.models.RecipeViewModel
+import com.tasty.recipesapp.models.RecipeModel
 import com.tasty.recipesapp.R
-import com.tasty.recipesapp.data.RecipeAdapter
+import com.tasty.recipesapp.data.RecipesListAdapter
+import com.tasty.recipesapp.models.RecipeListViewModel
 
-class RecipesFragment : Fragment(), RecipeAdapter.OnItemClickListener {
+class RecipesFragment : Fragment() {
+
+    companion object {
+        private val TAG: String? = RecipesFragment::class.java.canonicalName
+        const val BUNDLE_EXTRA_SELECTED_RECIPE_ID = "selected_recipe_id"
+    }
 
     private lateinit var binding: RecipesFragmentBinding
-    private val recipeAdapter = RecipeAdapter(this)
+    private lateinit var recipesAdapter: RecipesListAdapter
 
-    // Initialize ViewModel
-    private val recipeViewModel: RecipeViewModel by lazy {
-        ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())
-            .get(RecipeViewModel::class.java)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        binding = RecipesFragmentBinding.inflate(inflater, container, false)
+    ): View? {
+        binding = FragmentRecipesBinding.inflate(inflater, container, false)
+        initRecyclerView()
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val viewModel =
+            ViewModelProvider(this).get(RecipeListViewModel::class.java)
 
-        binding.recipesRecyclerView.adapter = recipeAdapter
+//        context?.let {
+//            viewModel.fetchRecipeData(it)
+//        }
 
-        recipeViewModel.recipeList.observe(viewLifecycleOwner) { recipes ->
-            recipeAdapter.setData(recipes)
+        viewModel.getAllRecipesFromApi()
+
+        viewModel.recipeList.observe(viewLifecycleOwner) {recipes ->
+            recipesAdapter.setData(recipes)
+            recipesAdapter.notifyItemRangeInserted(0, recipes.lastIndex)
         }
 
-        context?.let { recipeViewModel.loadRecipes(it) }
-
-        binding.newRecipeButton.setOnClickListener {
-            // Navigate to addNewRecipeFragment
+        viewModel.searchResults.observe(viewLifecycleOwner) { searchResults ->
+            // Frissítsd a RecyclerView-t a keresési eredményekkel
+            recipesAdapter.setData(searchResults)
+            recipesAdapter.notifyDataSetChanged()
         }
     }
 
-    override fun onItemClick(id: String) {
-        // Handle item click here
-        // For example: Navigate to recipe detail fragment with the provided ID
-        val bundle = Bundle().apply {
-            putString("recipeId", id)
-        }
-        findNavController().navigate(R.id.action_recipesFragment_to_recipeDetailFragment, bundle)
+    private fun initRecyclerView() {
+        recipesAdapter = RecipesListAdapter(ArrayList(), requireContext(),
+            onItemClickListener =
+            {
+                    recipe ->
+                navigateToRecipeDetail(recipe)
+            })
+        binding.recyclerView.adapter = recipesAdapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(context)
+        binding.recyclerView.addItemDecoration(
+            DividerItemDecoration(
+                activity,
+                DividerItemDecoration.VERTICAL
+            )
+        )
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        // Release resources held by the binding without setting it to null
-        binding.unbind()
+    private fun navigateToRecipeDetail(recipe: RecipeModel) {
+        findNavController().navigate(
+            R.id.action_recipesFragment_to_recipeDetailFragment,
+            bundleOf(BUNDLE_EXTRA_SELECTED_RECIPE_ID to recipe.id)
+        )
     }
+
+
 }
-
-
