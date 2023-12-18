@@ -12,23 +12,25 @@ import com.tasty.recipesapp.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.activity_main)
 
-
+        // Inflate the layout using view binding
         val binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(binding.root) // Set the content view to the root layout of the inflated binding
 
+        // Handle item selection in the bottom navigation view
         binding.bottomNavigation.setOnItemSelectedListener(NavigationBarView.OnItemSelectedListener {
             when(it.itemId){
+                // If Home is selected, navigate to the HomeFragment
                 R.id.homeFragment -> {
                     findNavController(R.id.nav_host_fragment).navigate(R.id.homeFragment)
                     return@OnItemSelectedListener true
                 }
+                // If Recipes is selected, navigate to the RecipesFragment
                 R.id.recipesFragment -> {
                     findNavController(R.id.nav_host_fragment).navigate(R.id.recipesFragment)
                     return@OnItemSelectedListener true
-
                 }
+                // If Profile is selected, navigate to the ProfileFragment
                 R.id.profileFragment -> {
                     findNavController(R.id.nav_host_fragment).navigate(R.id.profileFragment)
                     return@OnItemSelectedListener true
@@ -36,7 +38,5 @@ class MainActivity : AppCompatActivity() {
                 else -> true
             }
         })
-
-
     }
 }

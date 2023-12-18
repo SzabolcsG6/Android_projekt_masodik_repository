@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "\"com.tasty.recipesap"
+    namespace = "\"com.tasty.recipesapp"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "\"com.tasty.recipesap"
+        applicationId = "\"com.tasty.recipesapp"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
