@@ -1,6 +1,7 @@
 package com.tasty.recipesapp.models
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -47,11 +48,13 @@ class RecipeViewModel(private val recipeRepository: RecipeRepository) : ViewMode
             try {
                 val recipes = recipeRepository.loadRecipesFromJson()
                 _recipeList.value = recipes
+                Log.d("RecipeViewModel", "Recipes loaded: $recipes")
             } catch (e: IOException) {
                 // Handle file loading error: Display error message or return default value
                 e.printStackTrace()
                 // For example:
                 _recipeList.value = emptyList()
+                Log.e("RecipeViewModel", "Error loading recipes: ${e.message}")
             }
         }
     }
