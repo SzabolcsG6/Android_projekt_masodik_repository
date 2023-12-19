@@ -1,6 +1,7 @@
 package com.tasty.recipesapp.api
 
 import com.tasty.recipesapp.dtos.RecipeDto
+import com.tasty.recipesapp.dtos.RecipesDto
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query
@@ -11,8 +12,8 @@ interface RecipeService {
     "X-RapidAPI-Host': 'tasty.p.rapidapi.com"
     )
     suspend fun getRecipes(
-        @retrofit2.http.Query("from") from: String,
-        @retrofit2.http.Query("size") size: String,
-        @retrofit2.http.Query("tags") tags: String? = null
-    ) : RecipeDto
+        @Query("from") from: String,
+        @Query("size") size: String,
+        @Query("tags") tags: String? = null
+    ) : RecipesDto
 }

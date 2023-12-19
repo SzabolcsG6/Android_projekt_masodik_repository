@@ -1,5 +1,6 @@
 package com.tasty.recipesapp.activities
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -10,26 +11,35 @@ import com.tasty.recipesapp.R
 import com.tasty.recipesapp.activities.MainActivity
 
 // SplashActivity responsible for showing the splash screen
+@SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
+
     companion object {
         private const val TAG = "SplashActivity"
     }
 
     private val SPLASH_TIME_OUT: Long = 2000 // 2 seconds
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash) // Set the layout for the splash screen
+        setContentView(R.layout.activity_splash)
+//        Log.d(TAG, "onCreate: SplashActivity created.")
+//        val binding = ActivitySplashBinding.inflate(layoutInflater)
+//        setContentView(binding.root)
 
+        // Use a HandlerThread to create a background thread
+//        val handlerThread = HandlerThread("SplashHandlerThread", -10)
+//        handlerThread.start() // Create a Handler on the new HandlerThread
         val handler = Handler()
         handler.postDelayed(
             {
                 // Navigate to MainActivity after the delay
                 val intent = Intent(this@SplashActivity, MainActivity::class.java)
                 startActivity(intent)
-                finish() // Finish the current activity to prevent coming back to the splash screen on back press
+                finish()
             },
-            SPLASH_TIME_OUT // Delay for the splash screen
+            SPLASH_TIME_OUT
         )
     }
+
+
 }

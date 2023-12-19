@@ -9,7 +9,6 @@ import com.tasty.recipesapp.data.RecipeEntity
 false)
 abstract class RecipeDatabase : RoomDatabase() {
     abstract fun recipeDao(): RecipeDao
-
     companion object {
         // Create a singleton instance of the database
         @Volatile

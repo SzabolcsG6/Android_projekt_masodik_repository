@@ -12,6 +12,7 @@ data class InstructionDto(
     val appliance: String?, // Az eszköz típusa, opcionális
     val temperature: Int? // Hőmérséklet, opcionális
 )
+
 fun InstructionDto.toModel(): InstructionModel {
     return InstructionModel(
         id = this.id,
@@ -23,6 +24,9 @@ fun InstructionDto.toModel(): InstructionModel {
         temperature = this.temperature
     )
 }
+
+
 fun List<InstructionDto>.toModelList(): List<InstructionModel> {
     return this.map { it.toModel() }
 }
+
