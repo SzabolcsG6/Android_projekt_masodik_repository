@@ -27,7 +27,7 @@
         app:layout_constraintStart_toStartOf="parent" app:layout_constraintVertical_bias="0.100000024"
         />
     <TextView
-        android:text="to the RecipeApp"
+        android:text="to the Recipes App"
         android:layout_width="wrap_content"
         android:textSize="16dp"
         android:textStyle="bold"

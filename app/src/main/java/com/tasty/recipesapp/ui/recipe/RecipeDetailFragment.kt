@@ -1,6 +1,5 @@
 package com.tasty.recipesapp.ui.recipe
 
-import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log

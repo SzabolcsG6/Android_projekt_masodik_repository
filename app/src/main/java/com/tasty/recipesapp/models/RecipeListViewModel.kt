@@ -1,11 +1,9 @@
 package com.tasty.recipesapp.models
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tasty.recipesapp.dtos.RecipeDto
 import com.tasty.recipesapp.repositories.RecipeRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

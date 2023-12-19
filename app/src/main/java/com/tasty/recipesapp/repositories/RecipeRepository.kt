@@ -5,19 +5,16 @@ import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.tasty.recipesapp.api.RecipeApiClient
-import com.tasty.recipesapp.api.RecipeService
+
 import com.tasty.recipesapp.data.RecipeDao
 import com.tasty.recipesapp.data.RecipeDatabase
 import com.tasty.recipesapp.data.RecipeEntity
-
 import com.tasty.recipesapp.dtos.RecipeDto
+
 import com.tasty.recipesapp.dtos.RecipesDto
 import com.tasty.recipesapp.dtos.toModelList
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import org.json.JSONArray
-import org.json.JSONObject
+
 import java.io.IOException
 
 import com.tasty.recipesapp.models.RecipeModel

@@ -1,8 +1,5 @@
 package com.tasty.recipesapp.dtos
 
-import android.adservices.topics.Topic
-import android.nfc.Tag
-import androidx.core.view.KeyEventDispatcher
 import com.tasty.recipesapp.models.RecipeModel
 import com.tasty.recipesapp.models.TotalTimeModel
 
@@ -15,8 +12,8 @@ data class RecipeDto(
     val thumbnail_url: String,
     val total_time_tier: TotalTimeDto,
     val instructions: List<InstructionDto>
-)
 
+)
 
 fun RecipeDto.toModel(): RecipeModel {
     return RecipeModel(
@@ -34,7 +31,7 @@ fun RecipeDto.toModel(): RecipeModel {
 fun TotalTimeDto?.toModel(): TotalTimeModel {
     // Check for null and return a default TotalTimeModel if null
     return this?.let {
-        // Convert TotalTimeDTO to TotalTimeModel here
+        // Convert TotalTimeDto to TotalTimeModel here
         // Replace this block with your actual conversion logic
         // Example:
         TotalTimeModel(/* pass relevant parameters */)
