@@ -1,6 +1,7 @@
 package com.tasty.recipesapp.ui.recipe
 
 import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,21 +9,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.tasty.recipesapp.R
+import com.tasty.recipesapp.databinding.RecipeDetailFragmentBinding
 import com.tasty.recipesapp.models.RecipeDetailViewModel
 import com.tasty.recipesapp.models.RecipeModel
 
 
 class RecipeDetailFragment : Fragment() {
 
-    private lateinit var binding: FragmentRecipeDetailBinding
+    private lateinit var binding: RecipeDetailFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentRecipeDetailBinding.inflate(inflater, container, false)
+        binding = RecipeDetailFragmentBinding.inflate(inflater, container, false)
 
         return binding.root
         //return inflater.inflate(R.layout.fragment_recipe_detail, container, false)

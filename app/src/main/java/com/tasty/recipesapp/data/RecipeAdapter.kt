@@ -9,6 +9,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.tasty.recipesapp.R
+import com.tasty.recipesapp.databinding.RecipeListItemBinding
 
 import com.tasty.recipesapp.dtos.RecipeDto
 import com.tasty.recipesapp.models.RecipeModel

@@ -13,7 +13,9 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tasty.recipesapp.App
+import com.tasty.recipesapp.R
 import com.tasty.recipesapp.data.RecipesListAdapter
+import com.tasty.recipesapp.databinding.ProfileFragmentBinding
 
 import com.tasty.recipesapp.models.ProfileViewModel
 import com.tasty.recipesapp.models.RecipeModel
@@ -34,7 +36,7 @@ class ProfileFragment : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentProfileBinding.inflate(inflater, container, false)
+        binding = ProfileFragmentBinding.inflate(inflater, container, false)
         initRecyclerView()
         binding.addButton.setOnClickListener {
             navigateToNewRecipe()

@@ -11,16 +11,15 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/Theme.RecipesApp"
-            tools:targetApi="31"
-        android:name=".ui.App">
+            tools:targetApi="31">
 
         <!-- Add SplashActivity as the launcher activity -->
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".activities.MainActivity"
             android:exported="true"/>
         <activity
 
-            android:name=".activity.SplashActivity"
+            android:name=".activities.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

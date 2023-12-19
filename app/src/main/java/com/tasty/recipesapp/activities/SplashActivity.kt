@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.tasty.recipesapp.databinding.ActivitySplashBinding // Import the generated binding class
 import com.tasty.recipesapp.R
 import com.tasty.recipesapp.activities.MainActivity
-import com.tasty.recipesapp.providers.RepositoryProvider
 
 // SplashActivity responsible for showing the splash screen
 class SplashActivity : AppCompatActivity() {

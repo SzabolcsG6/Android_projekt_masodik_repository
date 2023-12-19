@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.tasty.recipesapp.App
 import com.tasty.recipesapp.data.RecipeEntity
+import com.tasty.recipesapp.databinding.NewRecipeFragmentBinding
 import com.tasty.recipesapp.models.ProfileViewModel
 import com.tasty.recipesapp.models.RecipeModel
 import com.tasty.recipesapp.models.TotalTimeModel

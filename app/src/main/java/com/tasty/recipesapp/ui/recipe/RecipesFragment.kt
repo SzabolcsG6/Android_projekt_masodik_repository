@@ -31,7 +31,7 @@ class RecipesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentRecipesBinding.inflate(inflater, container, false)
+        binding = RecipesFragmentBinding.inflate(inflater, container, false)
         initRecyclerView()
 
         return binding.root

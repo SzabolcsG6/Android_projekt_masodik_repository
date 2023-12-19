@@ -5,12 +5,14 @@ import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.tasty.recipesapp.api.RecipeApiClient
+import com.tasty.recipesapp.api.RecipeService
 import com.tasty.recipesapp.data.RecipeDao
 import com.tasty.recipesapp.data.RecipeDatabase
 import com.tasty.recipesapp.data.RecipeEntity
 
 import com.tasty.recipesapp.dtos.RecipeDto
 import com.tasty.recipesapp.dtos.RecipesDto
+import com.tasty.recipesapp.dtos.toModelList
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -61,9 +63,12 @@ object RecipeRepository {
         return recipesList
 
     }
+
+
     fun getRecipe(recipeId: Int): RecipeModel? {
         return recipesList.find { it.id == recipeId }
     }
+
     fun insertRecipe(recipeModel: RecipeModel) = myRecipesList.add(recipeModel)
     suspend fun insertRecipeDatabase(recipe: RecipeEntity) {
         recipeDao.insertRecipe(recipe)

@@ -1,6 +1,7 @@
 package com.tasty.recipesapp.models
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.tasty.recipesapp.repositories.RecipeRepository
 
 class RecipeDetailViewModel : ViewModel() {
