@@ -1,9 +1,0 @@
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
-<!-- Base application theme. -->
-<style android:name="Base.Theme.RecipesApp" android:parent="Theme.Material3.DayNight.NoActionBar">
-    <!-- Customize your light theme here. -->
-    <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-</style>
-
-<style android:name="Theme.RecipesApp" android:parent="Base.Theme.RecipesApp"/>
-</resources>

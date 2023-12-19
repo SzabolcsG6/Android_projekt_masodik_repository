@@ -5,6 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.tasty.recipesapp.data.RecipeEntity
+import com.tasty.recipesapp.data.RecipeDao
 @Database(entities = [RecipeEntity::class], version = 1, exportSchema =
 false)
 abstract class RecipeDatabase : RoomDatabase() {

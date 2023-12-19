@@ -15,6 +15,7 @@
         android:text="Recipe App"
         android:textSize="30dp"
         android:textStyle="bold"
+        android:textColor="#FFFF00"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" android:id="@+id/AppName"
         app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"

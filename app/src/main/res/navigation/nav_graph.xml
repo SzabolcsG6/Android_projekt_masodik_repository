@@ -32,7 +32,7 @@
         <fragment android:id="@+id/recipeDetailFragment"
             android:name="com.tasty.recipesapp.ui.recipe.RecipeDetailFragment"
             android:label="fragment_recipe_detail" tools:layout="@layout/recipe_detail_fragment"/>
-        <fragment android:id="@+id/recipesFragment" android:name="com.tasty.recipesapp.ui.recipe.RecipeDetailFragment"
+        <fragment android:id="@+id/recipesFragment" android:name="com.tasty.recipesapp.ui.recipe.RecipesFragment"
             android:label="fragment_recipes" tools:layout="@layout/recipes_fragment">
                 <action android:id="@+id/action_recipesFragment_to_recipeDetailFragment"
                     app:destination="@id/recipeDetailFragment"/>

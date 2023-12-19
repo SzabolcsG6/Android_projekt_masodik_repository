@@ -1,9 +1,0 @@
-<!-- secondary_button_background.xml -->
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-	android:shape="rectangle">
-	<gradient
-		android:startColor="#00FF00"
-		android:endColor="#00C4FF"
-		android:angle="90" /> <!-- Adjust the colors and angle as needed -->
-	<corners android:radius="8dp" /> <!-- Adjust the radius as desired -->
-</shape>

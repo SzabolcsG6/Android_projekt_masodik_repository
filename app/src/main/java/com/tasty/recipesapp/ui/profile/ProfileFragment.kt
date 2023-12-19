@@ -21,7 +21,9 @@ import com.tasty.recipesapp.models.ProfileViewModel
 import com.tasty.recipesapp.models.RecipeModel
 
 
-class ProfileFragment : Fragment(){
+class ProfileFragment : Fragment() {
+
+
     companion object {
         private val TAG: String? = ProfileFragment::class.java.canonicalName
         const val BUNDLE_EXTRA_SELECTED_RECIPE_ID = "selected_recipe_id"
@@ -68,7 +70,7 @@ class ProfileFragment : Fragment(){
             }
         }
     }
-    // Implement the onItemClick function from the RecipeAdapter's interface
+
     private fun initRecyclerView() {
         // Init empty adapter and attach to recycler view.
         recipesAdapter = RecipesListAdapter (ArrayList(), requireContext(),
@@ -90,15 +92,19 @@ class ProfileFragment : Fragment(){
             )
         )
     }
+
     private fun navigateToRecipeDetail(recipe: RecipeModel) {
         findNavController().navigate(
             R.id.action_profileFragment_to_recipeDetailFragment,
             bundleOf(BUNDLE_EXTRA_SELECTED_RECIPE_ID to recipe.id)
         )
     }
+
     private fun navigateToNewRecipe() {
         findNavController().navigate(
             R.id.action_profileFragment_to_newRecipeFragment
         )
     }
+
+
 }

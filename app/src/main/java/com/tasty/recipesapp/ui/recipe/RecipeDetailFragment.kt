@@ -13,7 +13,7 @@ import com.tasty.recipesapp.R
 import com.tasty.recipesapp.databinding.RecipeDetailFragmentBinding
 import com.tasty.recipesapp.models.RecipeDetailViewModel
 import com.tasty.recipesapp.models.RecipeModel
-
+import com.tasty.recipesapp.databinding.RecipesFragmentBinding
 
 class RecipeDetailFragment : Fragment() {
 
@@ -88,10 +88,5 @@ class RecipeDetailFragment : Fragment() {
             // Handle the case where recipeModel is null
             Log.e(TAG, "updateView: recipeModel is null")
         }
-
-
     }
-
-
-
 }
