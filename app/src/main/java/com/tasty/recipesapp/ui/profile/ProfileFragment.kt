@@ -67,6 +67,21 @@ class ProfileFragment : Fragment() {
                 Toast.makeText(context, "Failed to remove recipe", Toast.LENGTH_SHORT).show()
             }
         }
+        val viewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
+//Favorites so far
+//        // Observe the list of favorite recipes
+//        viewModel.favoriteRecipes.observe(viewLifecycleOwner) { favoriteRecipes ->
+//            // Update your UI to display the list of favorite recipes
+//            // For example, assuming you have a separate adapter for favorite recipes:
+//            val favoriteRecipesAdapter = FavoriteRecipesAdapter(favoriteRecipes)
+//            binding.favoriteRecyclerView.adapter = favoriteRecipesAdapter
+//            // Set layout manager, decoration, or any other configurations for the RecyclerView
+//
+//            // Example: Set a click listener for items in the favorite recipes list
+//            favoriteRecipesAdapter.setOnItemClickListener { selectedRecipe ->
+//                // Handle click action for the selected favorite recipe
+//                // For instance, navigate to its detail screen
+//            }
     }
 
     private fun initRecyclerView() {

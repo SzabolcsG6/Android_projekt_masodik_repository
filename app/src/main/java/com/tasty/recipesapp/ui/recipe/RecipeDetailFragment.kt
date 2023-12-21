@@ -48,6 +48,11 @@ class RecipeDetailFragment : Fragment() {
             } ?: run {
                 Log.e(ContentValues.TAG, "RecipeModel is null in onChanged callback")
             }
+            //Favorites
+//            binding.addToFavoritesButton.setOnClickListener {
+//                // Call a method in ViewModel to add the current recipe to favorites
+//                viewModel.addToFavorites(recipeModel)
+//            }
         }
 
 

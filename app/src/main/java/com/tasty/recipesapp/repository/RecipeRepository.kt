@@ -12,7 +12,11 @@ import com.tasty.recipesapp.repository.recipe.model.RecipeModel
 import com.tasty.recipesapp.repository.recipe.model.RecipesDTO
 import com.tasty.recipesapp.repository.recipe.model.toModelList
 import java.io.IOException
-
+/*TODO
+*  Favorites
+* User
+* Filter Search Sort
+* +Feluleti reszek, esetleg ne olvassa be mindig az Apibol*/
 object RecipeRepository {
     private lateinit var recipeDao: RecipeDAO
     private lateinit var recipeDatabase: RecipeDatabase // New addition
