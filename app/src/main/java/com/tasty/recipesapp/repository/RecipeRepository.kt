@@ -37,6 +37,18 @@ object RecipeRepository {
         recipesList = recipeApiClient.recipeService.getRecipes(from, size, tags).results.toModelList()
         return recipesList
     }
+    suspend fun searchRecipesFromApi(
+        from: String,
+        size: String,
+        tags: String? = null,
+        query: String
+    ): List<RecipeModel> {
+        recipesList = recipeApiClient.recipeService.getRecipes(from, size, tags).results
+            .filter { it.name.contains(query, ignoreCase = true) }
+            .toModelList()
+        return recipesList
+    }
+
     fun getRecipes(context: Context): List<RecipeModel> {
         lateinit var jsonString: String
 

@@ -1,17 +1,21 @@
 package com.tasty.recipesapp.ui.recipe
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tasty.recipesapp.R
 import com.tasty.recipesapp.databinding.FragmentRecipesBinding
+import com.tasty.recipesapp.repository.RecipeRepository
 import com.tasty.recipesapp.repository.recipe.model.RecipeModel
 import com.tasty.recipesapp.ui.recipe.adapter.RecipesListAdapter
 import com.tasty.recipesapp.ui.recipe.viewmodel.RecipeListViewModel
@@ -58,6 +62,8 @@ class RecipesFragment : Fragment() {
             recipesAdapter.setData(searchResults)
             recipesAdapter.notifyDataSetChanged()
         }
+
+
     }
 
     private fun initRecyclerView() {
@@ -83,6 +89,5 @@ class RecipesFragment : Fragment() {
             bundleOf(BUNDLE_EXTRA_SELECTED_RECIPE_ID to recipe.id)
         )
     }
-
 
 }

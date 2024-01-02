@@ -28,4 +28,6 @@ internal class RecipeListViewModel : ViewModel() {
             recipeList.value = recipes
         }
     }
+
+
 }
