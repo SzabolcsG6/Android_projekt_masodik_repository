@@ -12,11 +12,7 @@ import com.tasty.recipesapp.repository.recipe.model.RecipeModel
 import com.tasty.recipesapp.repository.recipe.model.RecipesDTO
 import com.tasty.recipesapp.repository.recipe.model.toModelList
 import java.io.IOException
-/*TODO
-*  Favorites
-* User
-* Filter Search Sort
-* +Feluleti reszek, esetleg ne olvassa be mindig az Apibol*/
+
 object RecipeRepository {
     private lateinit var recipeDao: RecipeDAO
     private lateinit var recipeDatabase: RecipeDatabase // New addition
@@ -76,6 +72,7 @@ object RecipeRepository {
         return recipesList.find { it.id == recipeId }
     }
 
+
     fun insertRecipe(recipeModel: RecipeModel) = myRecipesList.add(recipeModel)
     suspend fun insertRecipeDatabase(recipe: RecipeEntity) {
         recipeDao.insertRecipe(recipe)
@@ -83,5 +80,8 @@ object RecipeRepository {
     }
     fun deleteRecipe(recipeModel: RecipeModel) = myRecipesList.remove(recipeModel)
     fun getMyRecipes() = myRecipesList
+    fun getRecipesSortedByRating(): List<RecipeModel> {
+        return recipesList.sortedByDescending { it.userRatings.score }
+    }
 
 }

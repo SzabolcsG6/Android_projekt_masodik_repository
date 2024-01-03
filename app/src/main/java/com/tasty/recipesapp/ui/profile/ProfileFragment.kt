@@ -82,6 +82,24 @@ class ProfileFragment : Fragment() {
 //                // Handle click action for the selected favorite recipe
 //                // For instance, navigate to its detail screen
 //            }
+//        viewModel.favoriteRecipes.observe(viewLifecycleOwner) { favoriteRecipes ->
+//            // Update UI to display favoriteRecipes in the RecyclerView
+//            val favoriteRecipesAdapter = RecipesListAdapter(
+//                favoriteRecipes,
+//                requireContext(),
+//                onItemClickListener = { recipe ->
+//                    navigateToRecipeDetail(recipe)
+//                },
+//                onAddToFavoritesClick = { recipe ->
+//                    // Handle adding to favorites if needed
+//                }
+//            )
+//            binding.favoriteRecyclerView.adapter = favoriteRecipesAdapter
+//            // Set layout manager, decoration, or any other configurations for the RecyclerView
+//        }
+//
+//        // Fetch and observe favorite recipes
+//        viewModel.fetchFavoriteRecipes()
     }
 
     private fun initRecyclerView() {
@@ -94,7 +112,8 @@ class ProfileFragment : Fragment() {
             onItemLongClickListener =
             { recipe ->
                 viewModel.deleteRecipe(recipe)
-            })
+            },
+            onAddToFavoritesClick = {})
 
         binding.recyclerView.adapter = recipesAdapter
         binding.recyclerView.layoutManager = LinearLayoutManager(context)

@@ -5,6 +5,7 @@ import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +19,7 @@ class RecipesListAdapter (
     private val context: Context,
     private val onItemClickListener: (RecipeModel) -> Unit,
     private val onItemLongClickListener: (RecipeModel) -> Unit = {},
+    private val onAddToFavoritesClick: (RecipeModel) -> Unit // New callback
 ) : RecyclerView.Adapter<RecipesListAdapter.RecipeItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeItemViewHolder {
@@ -47,6 +49,12 @@ class RecipesListAdapter (
         holder.recipeRatingsView.text = ratingsLabel
             .plus(" ")
             .plus(currentRecipe.userRatings.score)
+
+        holder.btnAddToFavorites.setOnClickListener {
+            val currentPosition = holder.adapterPosition
+            val currentRecipe = recipesList[currentPosition]
+            onAddToFavoritesClick(currentRecipe) // Invoke the callback
+        }
     }
 
     /**
@@ -63,7 +71,7 @@ class RecipesListAdapter (
         val recipeDescriptionView: TextView = binding.recipeItemDescriptionView
         val recipeImageView : ImageView = binding.recipeImageView
         val recipeRatingsView: TextView = binding.recipeRatingsView
-
+        val btnAddToFavorites: Button = binding.btnAddToFavorites
         init {
             binding.root.setOnClickListener {
                 val currentPosition = this.adapterPosition

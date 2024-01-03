@@ -1,5 +1,7 @@
 package com.tasty.recipesapp.ui.recipe.viewmodel
 
+import android.content.Context
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.tasty.recipesapp.repository.RecipeRepository
@@ -15,4 +17,6 @@ class RecipeDetailViewModel : ViewModel() {
         val recipe = repository.getRecipe(recipeId)
         this.recipe.value = recipe
     }
+
+
 }

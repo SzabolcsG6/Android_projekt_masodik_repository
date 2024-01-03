@@ -28,6 +28,14 @@ internal class RecipeListViewModel : ViewModel() {
             recipeList.value = recipes
         }
     }
+    fun sortRecipesByRating() {
+        viewModelScope.launch {
+            val sortedRecipes = withContext(Dispatchers.IO) {
+                RecipeRepository.getRecipesSortedByRating()
+            }
+            recipeList.value = sortedRecipes
+        }
+    }
 
 
 }

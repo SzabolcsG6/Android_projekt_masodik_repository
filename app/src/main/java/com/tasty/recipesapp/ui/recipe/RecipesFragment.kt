@@ -1,11 +1,14 @@
 package com.tasty.recipesapp.ui.recipe
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -29,6 +32,8 @@ class RecipesFragment : Fragment() {
 
     private lateinit var binding: FragmentRecipesBinding
     private lateinit var recipesAdapter: RecipesListAdapter
+    private lateinit var addToFavoritesListener: (RecipeModel) -> Unit
+
 
 
     override fun onCreateView(
@@ -43,6 +48,7 @@ class RecipesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val favoriteRecipeIds = getFavoriteRecipeIds()
         val viewModel =
             ViewModelProvider(this).get(RecipeListViewModel::class.java)
 
@@ -51,15 +57,28 @@ class RecipesFragment : Fragment() {
 //        }
 
         viewModel.getAllRecipesFromApi()
+        val sortButton: Button = view.findViewById(R.id.sortButton)
 
+        // On button click, trigger sorting and update UI
+        sortButton.setOnClickListener {
+            viewModel.sortRecipesByRating()
+            viewModel.recipeList.observe(viewLifecycleOwner) { recipes ->
+                recipesAdapter.setData(recipes)
+                recipesAdapter.notifyDataSetChanged()
+                scrollToTop()
+            }
+        }
         viewModel.recipeList.observe(viewLifecycleOwner) {recipes ->
             recipesAdapter.setData(recipes)
             recipesAdapter.notifyItemRangeInserted(0, recipes.lastIndex)
         }
 
-        viewModel.searchResults.observe(viewLifecycleOwner) { searchResults ->
-            // Frissítsd a RecyclerView-t a keresési eredményekkel
-            recipesAdapter.setData(searchResults)
+        viewModel.searchResults.observe(viewLifecycleOwner) { recipes ->
+            val favoriteRecipes = recipes.filter { recipe ->
+                favoriteRecipeIds.contains(recipe.id.toString())
+            }
+            recipesAdapter.setData(favoriteRecipes)
+           // recipesAdapter.setData(searchResults)
             recipesAdapter.notifyDataSetChanged()
         }
 
@@ -67,12 +86,18 @@ class RecipesFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        recipesAdapter = RecipesListAdapter(ArrayList(), requireContext(),
-            onItemClickListener =
-            {
-                    recipe ->
+        recipesAdapter = RecipesListAdapter(
+            ArrayList(),
+            requireContext(),
+            onItemClickListener = { recipe ->
                 navigateToRecipeDetail(recipe)
-            })
+            },
+            onAddToFavoritesClick = { recipe ->
+                // Handle adding the recipe to favorites here
+                addToFavorites(recipe)
+            }
+        )
+
         binding.recyclerView.adapter = recipesAdapter
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.addItemDecoration(
@@ -81,7 +106,18 @@ class RecipesFragment : Fragment() {
                 DividerItemDecoration.VERTICAL
             )
         )
+
+
+    }private fun addToFavorites(recipe: RecipeModel) {
+        // Implement logic to add the recipe to favorites (e.g., using SharedPreferences or a database)
+        // For example, using SharedPreferences:
+        val sharedPreferences = requireContext().getSharedPreferences("Favorites", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putBoolean(recipe.id.toString(), true) // Store the recipe ID as a favorite
+        editor.apply()
+        Log.d("Favorites", "Recipe ${recipe.id} added to favorites")
     }
+
 
     private fun navigateToRecipeDetail(recipe: RecipeModel) {
         findNavController().navigate(
@@ -89,5 +125,11 @@ class RecipesFragment : Fragment() {
             bundleOf(BUNDLE_EXTRA_SELECTED_RECIPE_ID to recipe.id)
         )
     }
-
+    private fun getFavoriteRecipeIds(): Set<String> {
+        val sharedPreferences = requireContext().getSharedPreferences("Favorites", Context.MODE_PRIVATE)
+        return sharedPreferences.getStringSet("favoriteRecipeIds", setOf()) ?: setOf()
+    }
+    private fun scrollToTop() {
+        binding.recyclerView.scrollToPosition(0) // Scrolls to the top of the RecyclerView
+    }
 }
