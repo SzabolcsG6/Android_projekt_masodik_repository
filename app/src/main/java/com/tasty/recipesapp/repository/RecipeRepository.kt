@@ -83,5 +83,8 @@ object RecipeRepository {
     fun getRecipesSortedByRating(): List<RecipeModel> {
         return recipesList.sortedByDescending { it.userRatings.score }
     }
+    fun getRecipesSortedByName(): List<RecipeModel> {
+        return recipesList.sortedByDescending { it.name }
+    }
 
 }

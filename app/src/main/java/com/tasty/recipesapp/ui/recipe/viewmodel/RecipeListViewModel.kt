@@ -36,6 +36,13 @@ internal class RecipeListViewModel : ViewModel() {
             recipeList.value = sortedRecipes
         }
     }
-
+    fun sortRecipesByName() {
+        viewModelScope.launch {
+            val sortedRecipes = withContext(Dispatchers.IO) {
+                RecipeRepository.getRecipesSortedByName()
+            }
+            recipeList.value = sortedRecipes
+        }
+    }
 
 }
