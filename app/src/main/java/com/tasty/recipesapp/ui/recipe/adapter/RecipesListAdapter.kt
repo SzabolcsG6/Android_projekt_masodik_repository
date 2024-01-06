@@ -55,6 +55,9 @@ class RecipesListAdapter (
             val currentRecipe = recipesList[currentPosition]
             onAddToFavoritesClick(currentRecipe) // Invoke the callback
         }
+//        if (addToFavoritesListener != null) {
+//            addToFavoritesListener(recipe)
+//        }
     }
 
     /**

@@ -34,7 +34,7 @@ class RecipesFragment : Fragment() {
     private lateinit var binding: FragmentRecipesBinding
     private lateinit var recipesAdapter: RecipesListAdapter
     private lateinit var addToFavoritesListener: (RecipeModel) -> Unit
-
+    private val favoritesList = mutableListOf<RecipeModel>()
 
 
     override fun onCreateView(
@@ -132,10 +132,14 @@ class RecipesFragment : Fragment() {
         val editor = sharedPreferences.edit()
         editor.putBoolean(recipe.id.toString(), true) // Store the recipe ID as a favorite
         editor.apply()
+        favoritesList.add(recipe)
         Log.d("Favorites", "Recipe ${recipe.id} added to favorites")
     }
 
-
+    private fun removeRecipeFromFavorites(recipe: RecipeModel) {
+        favoritesList.remove(recipe)
+        // Update the shared preferences to remove the favorite recipe
+    }
     private fun navigateToRecipeDetail(recipe: RecipeModel) {
         findNavController().navigate(
             R.id.action_recipesFragment_to_recipeDetailFragment,
