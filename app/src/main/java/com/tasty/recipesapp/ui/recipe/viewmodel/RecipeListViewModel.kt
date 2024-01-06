@@ -7,13 +7,16 @@ import androidx.lifecycle.viewModelScope
 import com.tasty.recipesapp.repository.RecipeRepository
 import com.tasty.recipesapp.repository.recipe.model.RecipeModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.ConflatedBroadcastChannel
+import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 internal class RecipeListViewModel : ViewModel() {
 
     val repository = RecipeRepository
-
+    private val searchChannel = ConflatedBroadcastChannel<String>()
     val recipeList: MutableLiveData<List<RecipeModel>> =
         MutableLiveData()
 
@@ -44,5 +47,28 @@ internal class RecipeListViewModel : ViewModel() {
             recipeList.value = sortedRecipes
         }
     }
+
+//    init {
+//        observeSearchChannel()
+//    }
+//
+//    fun setSearchQuery(search: String) {
+//        searchChannel.offer(search)
+//    }
+
+//    private fun observeSearchChannel() {
+//        viewModelScope.launch {
+//            searchChannel.asFlow()
+//                .flatMapLatest { search ->
+//                    RecipeRepository.getSearchedRecipes(search)
+//                }
+//                .catch { throwable ->
+//                    // Handle errors here if needed
+//                }
+//                .collect { recipes ->
+//                    _searchResults.value = recipes
+//                }
+//        }
+//    }
 
 }

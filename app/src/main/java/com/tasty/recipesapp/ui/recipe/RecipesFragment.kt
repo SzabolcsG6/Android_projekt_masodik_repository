@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -49,12 +50,7 @@ class RecipesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val favoriteRecipeIds = getFavoriteRecipeIds()
-        val viewModel =
-            ViewModelProvider(this).get(RecipeListViewModel::class.java)
-
-//        context?.let {
-//            viewModel.fetchRecipeData(it)
-//        }
+        val viewModel = ViewModelProvider(this).get(RecipeListViewModel::class.java)
 
         viewModel.getAllRecipesFromApi()
         val sortButton: Button = view.findViewById(R.id.sortButton)
@@ -78,9 +74,30 @@ class RecipesFragment : Fragment() {
                 favoriteRecipeIds.contains(recipe.id.toString())
             }
             recipesAdapter.setData(favoriteRecipes)
-           // recipesAdapter.setData(searchResults)
+            // recipesAdapter.setData(searchResults)
             recipesAdapter.notifyDataSetChanged()
         }
+//        val searchView: SearchView = view.findViewById(R.id.searchView)
+//
+//        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+//            override fun onQueryTextSubmit(query: String?): Boolean {
+//                // Not required in this case
+//                return true
+//            }
+//
+//            override fun onQueryTextChange(newText: String?): Boolean {
+//                newText?.let {
+//                    viewModel.setSearchQuery(it)
+//                }
+//                return true
+//            }
+//        })
+//
+//        viewModel.searchResults.observe(viewLifecycleOwner) { recipes ->
+//            // Update your RecyclerView or adapter with the search results
+//            recipesAdapter.setData(recipes)
+//            recipesAdapter.notifyDataSetChanged()
+//        }
 
 
     }
