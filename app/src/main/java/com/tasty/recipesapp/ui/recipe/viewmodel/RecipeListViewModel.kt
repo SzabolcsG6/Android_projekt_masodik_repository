@@ -48,27 +48,6 @@ internal class RecipeListViewModel : ViewModel() {
         }
     }
 
-//    init {
-//        observeSearchChannel()
-//    }
-//
-//    fun setSearchQuery(search: String) {
-//        searchChannel.offer(search)
-//    }
 
-//    private fun observeSearchChannel() {
-//        viewModelScope.launch {
-//            searchChannel.asFlow()
-//                .flatMapLatest { search ->
-//                    RecipeRepository.getSearchedRecipes(search)
-//                }
-//                .catch { throwable ->
-//                    // Handle errors here if needed
-//                }
-//                .collect { recipes ->
-//                    _searchResults.value = recipes
-//                }
-//        }
-//    }
 
 }

@@ -16,6 +16,15 @@ interface RecipeDAO {
     suspend fun getAllRecipes(): List<RecipeEntity>
     @Delete
     suspend fun deleteRecipe(recipe: RecipeEntity)
-//    @Query("SELECT * FROM recipe WHERE name LIKE '%' || :search || '%'")
-//    fun getSearchedRecipes(search: String?): Flow<List<RecipeEntity>>
+    @Insert
+    suspend fun insertFavoriteRecipe(recipe: RecipeEntity)
+
+    // Function to delete a recipe from favorites
+//    @Delete
+//    suspend fun deleteFavoriteRecipe(recipeId: Int)
+//
+//    // Function to get all favorite recipes
+//    @Query("SELECT * FROM recipe WHERE isFavorite = 1")
+//    suspend fun getAllFavoriteRecipes(): List<RecipeEntity>
+//new additions
 }

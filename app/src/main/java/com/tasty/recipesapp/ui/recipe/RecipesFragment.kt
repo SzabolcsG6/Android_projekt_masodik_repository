@@ -77,27 +77,7 @@ class RecipesFragment : Fragment() {
             // recipesAdapter.setData(searchResults)
             recipesAdapter.notifyDataSetChanged()
         }
-//        val searchView: SearchView = view.findViewById(R.id.searchView)
-//
-//        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-//            override fun onQueryTextSubmit(query: String?): Boolean {
-//                // Not required in this case
-//                return true
-//            }
-//
-//            override fun onQueryTextChange(newText: String?): Boolean {
-//                newText?.let {
-//                    viewModel.setSearchQuery(it)
-//                }
-//                return true
-//            }
-//        })
-//
-//        viewModel.searchResults.observe(viewLifecycleOwner) { recipes ->
-//            // Update your RecyclerView or adapter with the search results
-//            recipesAdapter.setData(recipes)
-//            recipesAdapter.notifyDataSetChanged()
-//        }
+
 
 
     }
@@ -126,15 +106,13 @@ class RecipesFragment : Fragment() {
 
 
     }private fun addToFavorites(recipe: RecipeModel) {
-        // Implement logic to add the recipe to favorites (e.g., using SharedPreferences or a database)
-        // For example, using SharedPreferences:
         val sharedPreferences = requireContext().getSharedPreferences("Favorites", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putBoolean(recipe.id.toString(), true) // Store the recipe ID as a favorite
-        editor.apply()
-        favoritesList.add(recipe)
+        val favoriteRecipeIds = getFavoriteRecipeIds().toMutableSet()
+        favoriteRecipeIds.add(recipe.id.toString())
+        sharedPreferences.edit().putStringSet("favoriteRecipeIds", favoriteRecipeIds).apply()
         Log.d("Favorites", "Recipe ${recipe.id} added to favorites")
     }
+
 
     private fun removeRecipeFromFavorites(recipe: RecipeModel) {
         favoritesList.remove(recipe)
@@ -150,6 +128,7 @@ class RecipesFragment : Fragment() {
         val sharedPreferences = requireContext().getSharedPreferences("Favorites", Context.MODE_PRIVATE)
         return sharedPreferences.getStringSet("favoriteRecipeIds", setOf()) ?: setOf()
     }
+
     private fun scrollToTop() {
         binding.recyclerView.scrollToPosition(0) // Scrolls to the top of the RecyclerView
     }

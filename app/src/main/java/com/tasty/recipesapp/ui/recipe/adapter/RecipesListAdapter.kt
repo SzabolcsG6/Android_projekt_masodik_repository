@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -55,9 +56,9 @@ class RecipesListAdapter (
             val currentRecipe = recipesList[currentPosition]
             onAddToFavoritesClick(currentRecipe) // Invoke the callback
         }
-//        if (addToFavoritesListener != null) {
-//            addToFavoritesListener(recipe)
-//        }
+
+
+
     }
 
     /**
@@ -74,7 +75,10 @@ class RecipesListAdapter (
         val recipeDescriptionView: TextView = binding.recipeItemDescriptionView
         val recipeImageView : ImageView = binding.recipeImageView
         val recipeRatingsView: TextView = binding.recipeRatingsView
-        val btnAddToFavorites: Button = binding.btnAddToFavorites
+        val btnAddToFavorites: ImageButton = binding.btnAddToFavorites
+
+
+
         init {
             binding.root.setOnClickListener {
                 val currentPosition = this.adapterPosition
@@ -82,6 +86,7 @@ class RecipesListAdapter (
 
                 onItemClickListener(currentRecipe)
             }
+
 
             binding.root.setOnLongClickListener {
                 val currentPosition = this.adapterPosition
@@ -91,6 +96,8 @@ class RecipesListAdapter (
                 true
             }
         }
+
     }
+
 }
 

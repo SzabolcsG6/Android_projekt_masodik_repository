@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     xmlns:bind="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#FFFDD0">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -91,15 +92,19 @@
             app:layout_constraintTop_toBottomOf="@+id/totalTimeView"
             app:layout_constraintVertical_bias="0.178" />
 
-        <Button
+        <ImageButton
             android:id="@+id/btnAddToFavorites"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="664dp"
-            android:layout_marginEnd="16dp"
-            android:text="Add to Favorites"
+            android:layout_width="38dp"
+            android:layout_height="53dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="Add to favorites"
+            android:scaleType="fitCenter"
+            android:background="#01B301"
+            android:src="@drawable/icon_favorite"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
