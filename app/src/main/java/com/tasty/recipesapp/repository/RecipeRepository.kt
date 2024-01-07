@@ -88,31 +88,6 @@ object RecipeRepository {
     }
 
 
-//    suspend fun addToFavorites(recipe: RecipeModel) {
-//        recipeDao.insertFavoriteRecipe(recipe.toEntity()) // Convert RecipeModel to RecipeEntity
-//    }
-//
-//    suspend fun removeFromFavorites(recipe: RecipeModel) {
-//        recipeDao.deleteFavoriteRecipe(recipe.id)
-//    }
-//
-//    suspend fun getFavoriteRecipes(): List<RecipeModel> {
-//        return recipeDao.getAllFavoriteRecipes().map { it.toModel() } // Convert RecipeEntity to RecipeModel
-//    }
-//    fun RecipeModel.toEntity(): RecipeEntity {
-//        val gson = Gson() // You might need to import Gson if not already done
-//        val json = gson.toJson(this) // Convert RecipeModel to JSON string
-//
-//        return RecipeEntity(
-//            json = json,
-//            isFavorite = false // Set isFavorite initially as needed
-//        )
-//    }
-//
-//    fun RecipeEntity.toModel(): RecipeModel {
-//        val gson = Gson() // You might need to import Gson if not already done
-//        return gson.fromJson(this.json, RecipeModel::class.java)
-//    }
 
 
 }
