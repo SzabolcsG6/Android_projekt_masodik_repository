@@ -100,6 +100,7 @@ class ProfileFragment : Fragment() {
 //
 //        // Fetch and observe favorite recipes
 //        viewModel.fetchFavoriteRecipes()
+
     }
 
     private fun initRecyclerView() {

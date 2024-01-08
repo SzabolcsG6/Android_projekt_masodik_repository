@@ -1,5 +1,6 @@
 package com.tasty.recipesapp.ui.profile
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +8,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
+import com.tasty.recipesapp.api.RecipeService
 import com.tasty.recipesapp.databinding.FragmentNewRecipeBinding
 import com.tasty.recipesapp.repository.recipe.enitity.RecipeEntity
 import com.tasty.recipesapp.repository.recipe.model.RecipeModel
@@ -16,6 +19,10 @@ import com.tasty.recipesapp.repository.recipe.model.UserRatingsModel
 import com.tasty.recipesapp.ui.App
 import com.tasty.recipesapp.ui.profile.viewmodel.ProfileViewModel
 import com.tasty.recipesapp.ui.profile.viewmodel.factory.ProfileViewModelFactory
+import com.tasty.recipesapp.ui.recipe.viewmodel.RecipeListViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class NewRecipeFragment : Fragment() {
 
@@ -53,6 +60,9 @@ class NewRecipeFragment : Fragment() {
             val recipeEntity = RecipeEntity(json = jsonString)
             viewModel.insertRecipe(recipeModel)
             viewModel.insertRecipeToDatabase(recipeEntity)
+//            binding.displayFavoritesButton.setOnClickListener {
+//                displayFavoriteRecipes()
+//            }
         }
 
         viewModel.insertResult.observe(viewLifecycleOwner) {
@@ -68,5 +78,25 @@ class NewRecipeFragment : Fragment() {
     private fun navigateBack() {
         findNavController().popBackStack()
     }
+    private fun displayFavoriteRecipes() {
+//         val sharedPreferences = requireContext().getSharedPreferences("Favorites", Context.MODE_PRIVATE)
+//        val favoriteRecipeIds = sharedPreferences.getStringSet("favoriteRecipeIds", setOf()) ?: setOf()
+//
+//        // Assuming you have a predefined list of recipes or a method to fetch them
+//        val allRecipes = getAllRecipesFromApi() // Replace this with your method to get recipes
+//
+//        // Filter the recipes to display only the favorites
+//        val favoriteRecipes = allRecipes.filter { it.id.toString() in favoriteRecipeIds }
+//
+//        if (favoriteRecipes.isNotEmpty()) {
+//            // Example: Show favorite recipe names in a toast
+//            val favoriteRecipeNames = favoriteRecipes.joinToString(separator = "\n") { it.name }
+//            Toast.makeText(requireContext(), "Favorite Recipes:\n$favoriteRecipeNames", Toast.LENGTH_LONG).show()
+//        } else {
+//            Toast.makeText(requireContext(), "No favorite recipes found", Toast.LENGTH_SHORT).show()
+//        }
+    }
+
+
 
 }
