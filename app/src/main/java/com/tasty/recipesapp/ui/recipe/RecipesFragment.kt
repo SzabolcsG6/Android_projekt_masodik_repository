@@ -35,7 +35,8 @@ class RecipesFragment : Fragment() {
     private lateinit var recipesAdapter: RecipesListAdapter
     private lateinit var addToFavoritesListener: (RecipeModel) -> Unit
     private val favoritesList = mutableListOf<RecipeModel>()
-
+//    val favoritesButton: Button? = view.findViewById(R.id.favoritesButton)
+//displaying favorites
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -103,7 +104,23 @@ class RecipesFragment : Fragment() {
                 DividerItemDecoration.VERTICAL
             )
         )
-
+        //displaying favorites
+//        if (favoritesButton != null) {
+//            favoritesButton.setOnClickListener {
+//                val favoriteRecipeIds = getFavoriteRecipeIds()
+//
+//                viewModel.recipeList.observe(viewLifecycleOwner) { recipes ->
+//                    val favoriteRecipes = recipes.filter { recipe ->
+//                        favoriteRecipeIds.contains(recipe.id.toString())
+//                    }
+//
+//                    recipesAdapter.setData(favoriteRecipes)
+//                    recipesAdapter.notifyDataSetChanged()
+//                }
+//            }
+//        } else {
+//            Log.d(TAG, "FavoritesButton is null")
+//        }
 
     }private fun addToFavorites(recipe: RecipeModel) {
         val sharedPreferences = requireContext().getSharedPreferences("Favorites", Context.MODE_PRIVATE)
