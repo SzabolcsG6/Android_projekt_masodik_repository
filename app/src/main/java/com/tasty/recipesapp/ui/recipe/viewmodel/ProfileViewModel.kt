@@ -30,6 +30,7 @@ class ProfileViewModel(private val repository: RecipeRepository) : ViewModel() {
 //        repository.removeFromFavorites(recipe)
 //        fetchFavoriteRecipes() // Update the list after removing
 //    }
+//just a test to display favorites
 
     // Other methods for profile-related functionalities
 }

@@ -52,7 +52,7 @@ class RecipeDetailFragment : Fragment() {
 //            binding.addToFavoritesButton.setOnClickListener {
 //                // Call a method in ViewModel to add the current recipe to favorites
 //                viewModel.addToFavorites(recipeModel)
-//            }
+//            }//probably causing the crashes
         }
 
 

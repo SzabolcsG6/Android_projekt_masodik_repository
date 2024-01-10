@@ -36,7 +36,7 @@ class RecipesFragment : Fragment() {
     private lateinit var addToFavoritesListener: (RecipeModel) -> Unit
     private val favoritesList = mutableListOf<RecipeModel>()
 //    val favoritesButton: Button? = view.findViewById(R.id.favoritesButton)
-//displaying favorites
+//displaying favorites crashes the app somehow
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
