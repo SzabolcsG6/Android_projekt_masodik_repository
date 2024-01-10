@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.PopupMenu
 import android.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -30,7 +31,7 @@ class RecipesFragment : Fragment() {
         private val TAG: String? = RecipesFragment::class.java.canonicalName
         const val BUNDLE_EXTRA_SELECTED_RECIPE_ID = "selected_recipe_id"
     }
-
+    private lateinit var popupMenu: PopupMenu
     private lateinit var binding: FragmentRecipesBinding
     private lateinit var recipesAdapter: RecipesListAdapter
     private lateinit var addToFavoritesListener: (RecipeModel) -> Unit
@@ -55,16 +56,61 @@ class RecipesFragment : Fragment() {
 
         viewModel.getAllRecipesFromApi()
         val sortButton: Button = view.findViewById(R.id.sortButton)
-
+        val sortButton2: Button = view.findViewById(R.id.sortButton2)
+        val chooserButton : Button=view.findViewById(R.id.chooserButton)
+        sortButton.visibility = View.GONE
+        sortButton2.visibility = View.GONE
         // On button click, trigger sorting and update UI
-        sortButton.setOnClickListener {
-            viewModel.sortRecipesByRating()
-            viewModel.recipeList.observe(viewLifecycleOwner) { recipes ->
-                recipesAdapter.setData(recipes)
-                recipesAdapter.notifyDataSetChanged()
-                scrollToTop()
+//        sortButton.setOnClickListener {
+//            viewModel.sortRecipesByRating()
+//            viewModel.recipeList.observe(viewLifecycleOwner) { recipes ->
+//                recipesAdapter.setData(recipes)
+//                recipesAdapter.notifyDataSetChanged()
+//                scrollToTop()
+//            }
+//        }
+//
+//        sortButton2.setOnClickListener {
+//            viewModel.sortRecipesByRatingAscending()
+//            viewModel.recipeList.observe(viewLifecycleOwner) { recipes ->
+//                recipesAdapter.setData(recipes)
+//                recipesAdapter.notifyDataSetChanged()
+//                scrollToTop()
+//            }
+//        }
+        popupMenu = PopupMenu(requireContext(), chooserButton)
+        popupMenu.menuInflater.inflate(R.menu.sort_menu, popupMenu.menu)
+// Show the PopupMenu when the chooserButton is clicked
+        chooserButton.setOnClickListener {
+            popupMenu.show()
+        }
+        // Handle item click in the PopupMenu
+        popupMenu.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.sortButton -> {
+                    viewModel.sortRecipesByRating()
+                    viewModel.recipeList.observe(viewLifecycleOwner) { recipes ->
+                        recipesAdapter.setData(recipes)
+                        recipesAdapter.notifyDataSetChanged()
+                        scrollToTop()
+                    }
+                    true // Indicate that the menu item click is handled
+                }
+                R.id.sortButton2 -> {
+                    viewModel.sortRecipesByRatingAscending()
+                    viewModel.recipeList.observe(viewLifecycleOwner) { recipes ->
+                        recipesAdapter.setData(recipes)
+                        recipesAdapter.notifyDataSetChanged()
+                        scrollToTop()
+                    }
+                    true // Indicate that the menu item click is handled
+                }
+                else -> false // Indicate that the menu item click is not handled
             }
         }
+
+
+
         viewModel.recipeList.observe(viewLifecycleOwner) {recipes ->
             recipesAdapter.setData(recipes)
             recipesAdapter.notifyItemRangeInserted(0, recipes.lastIndex)
