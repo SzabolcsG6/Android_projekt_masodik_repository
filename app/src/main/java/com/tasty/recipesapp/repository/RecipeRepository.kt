@@ -25,6 +25,7 @@ object RecipeRepository {
         this.recipeDatabase = recipeDatabase
         this.recipeDao = recipeDatabase.recipeDao()
     }
+
     suspend fun getRecipeFromApi(
         from: String,
         size: String,

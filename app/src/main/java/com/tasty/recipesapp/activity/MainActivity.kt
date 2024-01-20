@@ -6,10 +6,21 @@ import androidx.navigation.findNavController
 import com.google.android.material.navigation.NavigationBarView
 import com.tasty.recipesapp.R
 import com.tasty.recipesapp.databinding.ActivityMainBinding
+import com.tasty.recipesapp.repository.RecipeRepository
+import com.tasty.recipesapp.repository.RecipeRepository.getRecipes
+import com.tasty.recipesapp.repository.RecipeRepository.initialize
+import com.tasty.recipesapp.repository.recipe.RecipeDatabase
+import com.tasty.recipesapp.repository.recipe.model.RecipeModel
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var recipesList: List<RecipeModel> // Declare recipesList as an instance variable
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+//        initialize(RecipeDatabase.getDatabase(this)) // Call initialize before getRecipes
+//
+//        // Fetch recipes from JSON file
+//        recipesList = getRecipes(this)
         //setContentView(R.layout.activity_main)
 
 

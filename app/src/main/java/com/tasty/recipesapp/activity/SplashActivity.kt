@@ -4,9 +4,15 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.navigation.NavigationBarView
 import com.tasty.recipesapp.R
+import com.tasty.recipesapp.repository.RecipeRepository
+import com.tasty.recipesapp.repository.recipe.RecipeDatabase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
@@ -19,13 +25,13 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-//        Log.d(TAG, "onCreate: SplashActivity created.")
-//        val binding = ActivitySplashBinding.inflate(layoutInflater)
-//        setContentView(binding.root)
+        Log.d(TAG, "onCreate: SplashActivity created.")
+        GlobalScope.launch(Dispatchers.Main) {
+            val db = RecipeDatabase.getDatabase(this@SplashActivity) // Get database instance
+            RecipeRepository.initialize(db) // Initialize database with open database instance
+            Log.d(TAG, "Database initialized successfully.")
+        }
 
-        // Use a HandlerThread to create a background thread
-//        val handlerThread = HandlerThread("SplashHandlerThread", -10)
-//        handlerThread.start() // Create a Handler on the new HandlerThread
         val handler = Handler()
         handler.postDelayed(
             {
