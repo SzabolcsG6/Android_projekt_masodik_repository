@@ -57,9 +57,13 @@ class RecipesFragment : Fragment() {
         viewModel.getAllRecipesFromApi()
         val sortButton: Button = view.findViewById(R.id.sortButton)
         val sortButton2: Button = view.findViewById(R.id.sortButton2)
+        val sortButton3: Button = view.findViewById(R.id.sortButton3)
+        val sortButton4: Button = view.findViewById(R.id.sortButton4)
         val chooserButton : Button=view.findViewById(R.id.chooserButton)
         sortButton.visibility = View.GONE
         sortButton2.visibility = View.GONE
+        sortButton3.visibility = View.GONE
+        sortButton4.visibility = View.GONE
         // On button click, trigger sorting and update UI
 //        sortButton.setOnClickListener {
 //            viewModel.sortRecipesByRating()
@@ -98,6 +102,24 @@ class RecipesFragment : Fragment() {
                 }
                 R.id.sortButton2 -> {
                     viewModel.sortRecipesByRatingAscending()
+                    viewModel.recipeList.observe(viewLifecycleOwner) { recipes ->
+                        recipesAdapter.setData(recipes)
+                        recipesAdapter.notifyDataSetChanged()
+                        scrollToTop()
+                    }
+                    true // Indicate that the menu item click is handled
+                }
+                R.id.sortButton3 -> {
+                    viewModel.sortRecipesByName()
+                    viewModel.recipeList.observe(viewLifecycleOwner) { recipes ->
+                        recipesAdapter.setData(recipes)
+                        recipesAdapter.notifyDataSetChanged()
+                        scrollToTop()
+                    }
+                    true // Indicate that the menu item click is handled
+                }
+                R.id.sortButton4 -> {
+                    viewModel.sortRecipesByNameAscending()
                     viewModel.recipeList.observe(viewLifecycleOwner) { recipes ->
                         recipesAdapter.setData(recipes)
                         recipesAdapter.notifyDataSetChanged()

@@ -91,7 +91,19 @@ object RecipeRepository {
     fun getRecipesSortedByName(): List<RecipeModel> {
         return recipesList.sortedByDescending { it.name }
     }
+    fun getRecipesSortedByNameAscending(): List<RecipeModel> {
+        return recipesList.sortedBy { it.name }
+    }
 
+//    suspend fun insertRecipeDatabase(recipeModel: RecipeModel) {
+//        val recipeEntity = RecipeEntity(
+//            id = recipeModel.id,
+//            name = recipeModel.name,
+//
+//        )
+//        recipeDao.insertRecipe(recipeEntity)
+//        Log.d("Database-", "Inserted")
+//    }
 
 
 
