@@ -64,24 +64,6 @@ class RecipesFragment : Fragment() {
         sortButton2.visibility = View.GONE
         sortButton3.visibility = View.GONE
         sortButton4.visibility = View.GONE
-        // On button click, trigger sorting and update UI
-//        sortButton.setOnClickListener {
-//            viewModel.sortRecipesByRating()
-//            viewModel.recipeList.observe(viewLifecycleOwner) { recipes ->
-//                recipesAdapter.setData(recipes)
-//                recipesAdapter.notifyDataSetChanged()
-//                scrollToTop()
-//            }
-//        }
-//
-//        sortButton2.setOnClickListener {
-//            viewModel.sortRecipesByRatingAscending()
-//            viewModel.recipeList.observe(viewLifecycleOwner) { recipes ->
-//                recipesAdapter.setData(recipes)
-//                recipesAdapter.notifyDataSetChanged()
-//                scrollToTop()
-//            }
-//        }
         popupMenu = PopupMenu(requireContext(), chooserButton)
         popupMenu.menuInflater.inflate(R.menu.sort_menu, popupMenu.menu)
 // Show the PopupMenu when the chooserButton is clicked

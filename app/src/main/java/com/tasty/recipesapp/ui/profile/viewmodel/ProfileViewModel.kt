@@ -1,14 +1,17 @@
 package com.tasty.recipesapp.ui.profile.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tasty.recipesapp.repository.RecipeRepository
 import com.tasty.recipesapp.repository.recipe.enitity.RecipeEntity
 import com.tasty.recipesapp.repository.recipe.model.RecipeModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class ProfileViewModel(private val repository: RecipeRepository) : ViewModel() {
+class ProfileViewModel(private val repository: RecipeRepository,private val context: Context) : ViewModel() {
 
     // Live data members
     var myRecipesList: MutableLiveData<List<RecipeModel>> =
@@ -68,3 +71,4 @@ class ProfileViewModel(private val repository: RecipeRepository) : ViewModel() {
 //        }
 //    }
 }
+

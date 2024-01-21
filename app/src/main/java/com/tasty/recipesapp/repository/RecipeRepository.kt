@@ -46,7 +46,7 @@ object RecipeRepository {
         return recipesList
     }
 
-    fun getRecipes(context: Context): List<RecipeModel> {
+    fun getRecipesFromFile(context: Context): List<RecipeModel> {
         lateinit var jsonString: String
 
         try {
@@ -95,15 +95,7 @@ object RecipeRepository {
         return recipesList.sortedBy { it.name }
     }
 
-//    suspend fun insertRecipeDatabase(recipeModel: RecipeModel) {
-//        val recipeEntity = RecipeEntity(
-//            id = recipeModel.id,
-//            name = recipeModel.name,
-//
-//        )
-//        recipeDao.insertRecipe(recipeEntity)
-//        Log.d("Database-", "Inserted")
-//    }
+
 
 
 

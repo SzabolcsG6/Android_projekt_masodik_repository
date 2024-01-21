@@ -7,7 +7,7 @@ import com.google.android.material.navigation.NavigationBarView
 import com.tasty.recipesapp.R
 import com.tasty.recipesapp.databinding.ActivityMainBinding
 import com.tasty.recipesapp.repository.RecipeRepository
-import com.tasty.recipesapp.repository.RecipeRepository.getRecipes
+import com.tasty.recipesapp.repository.RecipeRepository.getRecipesFromFile
 import com.tasty.recipesapp.repository.RecipeRepository.initialize
 import com.tasty.recipesapp.repository.recipe.RecipeDatabase
 import com.tasty.recipesapp.repository.recipe.model.RecipeModel

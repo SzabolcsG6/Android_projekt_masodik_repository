@@ -1,5 +1,6 @@
 package com.tasty.recipesapp.ui.recipe.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -63,7 +64,14 @@ internal class RecipeListViewModel : ViewModel() {
             recipeList.value = sortedRecipes
         }
     }
-
+    fun getAllRecipesFromFile(context: Context) {
+        viewModelScope.launch {
+            val recipes = withContext(Dispatchers.IO) {
+                RecipeRepository.getRecipesFromFile(context)
+            }
+            recipeList.value = recipes
+        }
+    }
 
 
 }
