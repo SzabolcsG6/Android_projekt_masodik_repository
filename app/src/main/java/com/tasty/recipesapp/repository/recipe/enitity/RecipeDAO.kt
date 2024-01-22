@@ -1,5 +1,6 @@
 package com.tasty.recipesapp.repository.recipe.enitity
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -17,6 +18,9 @@ interface RecipeDAO {
     suspend fun getAllRecipes(): List<RecipeEntity>
     @Delete
     suspend fun deleteRecipe(recipe: RecipeEntity)
+    @Query("SELECT * FROM recipe")
+    fun getAllRecipesLiveData(): LiveData<List<RecipeEntity>>
+
 //    @Insert(onConflict = OnConflictStrategy.REPLACE)
 //    suspend fun insertFavoriteRecipe(recipe: RecipeEntity)
 //

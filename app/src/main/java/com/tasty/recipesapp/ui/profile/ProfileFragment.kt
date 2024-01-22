@@ -51,19 +51,20 @@ class ProfileFragment : Fragment() {
         viewModel = ViewModelProvider(this, factory)[ProfileViewModel::class.java]
 
         viewModel.fetchMyRecipesData()
+        viewModel.fetchDatabaseRecipes()
 
         viewModel.myRecipesList.observe(viewLifecycleOwner) { myRecipes ->
             recipesAdapter.setData(myRecipes)
             recipesAdapter.notifyItemRangeChanged(0, myRecipes.lastIndex)
         }
 
-        viewModel.deleteResult.observe(viewLifecycleOwner) {
-            if (it) {
-                Toast.makeText(context, "Recipe removed successfully", Toast.LENGTH_SHORT).show()
-                recipesAdapter.notifyDataSetChanged()
+        viewModel.deleteResult.observe(viewLifecycleOwner) { result ->
+            val message = if (result) {
+                "Recipe removed successfully"
             } else {
-                Toast.makeText(context, "Failed to remove recipe", Toast.LENGTH_SHORT).show()
+                "Failed to remove recipe"
             }
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
         }
     }
 

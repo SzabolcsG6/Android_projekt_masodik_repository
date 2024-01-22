@@ -2,6 +2,7 @@ package com.tasty.recipesapp.repository
 
 import android.content.Context
 import android.util.Log
+import androidx.lifecycle.LiveData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.tasty.recipesapp.api.RecipeApiClient
@@ -18,13 +19,23 @@ object RecipeRepository {
     private lateinit var recipeDatabase: RecipeDatabase // New addition
     private val TAG: String? = RecipeRepository::class.java.canonicalName
     private var recipesList: List<RecipeModel> = emptyList()
+    private var dbRecipesList: List<RecipeModel> = emptyList()
     private var myRecipesList: ArrayList<RecipeModel> = ArrayList()
-
+    private lateinit var recipesListLiveData: LiveData<List<RecipeEntity>>
     private val recipeApiClient = RecipeApiClient()
     fun initialize(recipeDatabase: RecipeDatabase) {
         this.recipeDatabase = recipeDatabase
         this.recipeDao = recipeDatabase.recipeDao()
+        recipesListLiveData = recipeDao.getAllRecipesLiveData()
+        // Initialize recipesList from the database
+        recipesListLiveData.observeForever { recipes ->
+//            dbRecipesList = recipes.toModelList()
+        }
     }
+//    fun initialize(recipeDatabase: RecipeDatabase) {
+//        this.recipeDatabase = recipeDatabase
+//        this.recipeDao = recipeDatabase.recipeDao()
+//    }
 
     suspend fun getRecipeFromApi(
         from: String,
@@ -34,6 +45,21 @@ object RecipeRepository {
         recipesList = recipeApiClient.recipeService.getRecipes(from, size, tags).results.toModelList()
         return recipesList
     }
+    fun getRecipesFromDatabase(): LiveData<List<RecipeEntity>> {
+        return recipesListLiveData
+    }
+    // Update to work with LiveData
+    suspend fun initializeFromDatabase() {
+        // Initialize recipesList from the database, create a new list
+//        val recipesFromDatabase = recipeDao.getAllRecipes().toModelList()
+//        dbRecipesList = recipesFromDatabase
+    }
+//    suspend fun getRecipesFromDatabase(): List<RecipeEntity> {
+//        return recipeDao.getAllRecipes()
+//    }
+//    suspend fun initializeFromDatabase() {
+//        recipesList = recipeDao.getAllRecipes().toModelList()
+//    }
     suspend fun searchRecipesFromApi(
         from: String,
         size: String,

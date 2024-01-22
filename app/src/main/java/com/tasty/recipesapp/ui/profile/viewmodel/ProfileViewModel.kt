@@ -1,6 +1,7 @@
 package com.tasty.recipesapp.ui.profile.viewmodel
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,6 +13,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class ProfileViewModel(private val repository: RecipeRepository,private val context: Context) : ViewModel() {
+    private val _databaseRecipesList = MutableLiveData<List<RecipeEntity>>()
+    val databaseRecipesList: LiveData<List<RecipeEntity>> get() = _databaseRecipesList
+
 
     // Live data members
     var myRecipesList: MutableLiveData<List<RecipeModel>> =
@@ -22,6 +26,11 @@ class ProfileViewModel(private val repository: RecipeRepository,private val cont
 
     var deleteResult: MutableLiveData<Boolean> =
         MutableLiveData()
+    init {
+        viewModelScope.launch {
+            repository.initializeFromDatabase()
+        }
+    }
 
     fun fetchMyRecipesData() {
         val recipes = repository.getMyRecipes()
@@ -34,12 +43,14 @@ class ProfileViewModel(private val repository: RecipeRepository,private val cont
     fun insertRecipe(recipe: RecipeModel) {
         val result = repository.insertRecipe(recipe)
         insertResult.value = result
+        fetchMyRecipesData()
     }
 
     fun insertRecipeToDatabase(recipe: RecipeEntity) {
         viewModelScope.launch {
             repository.insertRecipeDatabase(recipe)
         }
+        fetchDatabaseRecipes()
     }
 
     fun deleteRecipe(recipe: RecipeModel) {
@@ -47,9 +58,53 @@ class ProfileViewModel(private val repository: RecipeRepository,private val cont
         deleteResult.value = result
     }
 
+    fun fetchDatabaseRecipes() {
+        viewModelScope.launch {
+            // Use the getRecipesFromDatabase method to load recipes from the local database
+            val databaseRecipes = withContext(Dispatchers.IO) {
+                repository.getRecipesFromDatabase()
+            }
+            databaseRecipes.observeForever { databaseRecipes ->
+                _databaseRecipesList.postValue(databaseRecipes)
+            }
+        }
+    }
+
     /**
      * Insert into database.
      */
+//    fun sortRecipesByRating() {
+//        viewModelScope.launch {
+//            val sortedRecipes = withContext(Dispatchers.IO) {
+//                RecipeRepository.getRecipesSortedByRating()
+//            }
+//            _databaseRecipesList.value = sortedRecipes
+//        }
+//    }
+//    fun sortRecipesByRatingAscending() {
+//        viewModelScope.launch {
+//            val sortedRecipes = withContext(Dispatchers.IO) {
+//                RecipeRepository.getRecipesSortedByRatingAscending()
+//            }
+//            _databaseRecipesList.value = sortedRecipes
+//        }
+//    }
+//    fun sortRecipesByName() {
+//        viewModelScope.launch {
+//            val sortedRecipes = withContext(Dispatchers.IO) {
+//                RecipeRepository.getRecipesSortedByName()
+//            }
+//            _databaseRecipesList.value = sortedRecipes
+//        }
+//    }
+//    fun sortRecipesByNameAscending() {
+//        viewModelScope.launch {
+//            val sortedRecipes = withContext(Dispatchers.IO) {
+//                RecipeRepository.getRecipesSortedByNameAscending()
+//            }
+//            _databaseRecipesList.value = sortedRecipes
+//        }
+//    }
 //    fun insertRecipe(recipe: RecipeEntity) {
 //        viewModelScope.launch {
 //            val isSuccessFull = withContext(Dispatchers.IO) {
@@ -71,4 +126,3 @@ class ProfileViewModel(private val repository: RecipeRepository,private val cont
 //        }
 //    }
 }
-
