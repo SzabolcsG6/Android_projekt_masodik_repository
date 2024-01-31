@@ -42,6 +42,7 @@ class ProfileViewModel(private val repository: RecipeRepository,private val cont
      */
     fun insertRecipe(recipe: RecipeModel) {
         val result = repository.insertRecipe(recipe)
+
         insertResult.value = result
         fetchMyRecipesData()
     }
@@ -70,41 +71,23 @@ class ProfileViewModel(private val repository: RecipeRepository,private val cont
         }
     }
 
+
     /**
      * Insert into database.
      */
-//    fun sortRecipesByRating() {
-//        viewModelScope.launch {
-//            val sortedRecipes = withContext(Dispatchers.IO) {
-//                RecipeRepository.getRecipesSortedByRating()
-//            }
-//            _databaseRecipesList.value = sortedRecipes
-//        }
-//    }
-//    fun sortRecipesByRatingAscending() {
-//        viewModelScope.launch {
-//            val sortedRecipes = withContext(Dispatchers.IO) {
-//                RecipeRepository.getRecipesSortedByRatingAscending()
-//            }
-//            _databaseRecipesList.value = sortedRecipes
-//        }
-//    }
-//    fun sortRecipesByName() {
-//        viewModelScope.launch {
-//            val sortedRecipes = withContext(Dispatchers.IO) {
-//                RecipeRepository.getRecipesSortedByName()
-//            }
-//            _databaseRecipesList.value = sortedRecipes
-//        }
-//    }
-//    fun sortRecipesByNameAscending() {
-//        viewModelScope.launch {
-//            val sortedRecipes = withContext(Dispatchers.IO) {
-//                RecipeRepository.getRecipesSortedByNameAscending()
-//            }
-//            _databaseRecipesList.value = sortedRecipes
-//        }
-//    }
+    fun getRecipesSortedByRatingDatabase(): List<RecipeModel> {
+        return RecipeRepository.myRecipesList.sortedByDescending { it.userRatings.score }
+    }
+    fun getRecipesSortedByRatingAscendingDatabase(): List<RecipeModel> {
+        return RecipeRepository.myRecipesList.sortedBy { it.userRatings.score }
+    }
+
+    fun getRecipesSortedByNameDatabase(): List<RecipeModel> {
+        return RecipeRepository.myRecipesList.sortedByDescending { it.name }
+    }
+    fun getRecipesSortedByNameAscendingDatabase(): List<RecipeModel> {
+        return RecipeRepository.myRecipesList.sortedBy { it.name }
+    }
 //    fun insertRecipe(recipe: RecipeEntity) {
 //        viewModelScope.launch {
 //            val isSuccessFull = withContext(Dispatchers.IO) {

@@ -16,11 +16,11 @@ import java.io.IOException
 
 object RecipeRepository {
     private lateinit var recipeDao: RecipeDAO
-    private lateinit var recipeDatabase: RecipeDatabase // New addition
+    lateinit var recipeDatabase: RecipeDatabase // New addition
     private val TAG: String? = RecipeRepository::class.java.canonicalName
     private var recipesList: List<RecipeModel> = emptyList()
     private var dbRecipesList: List<RecipeModel> = emptyList()
-    private var myRecipesList: ArrayList<RecipeModel> = ArrayList()
+     var myRecipesList: ArrayList<RecipeModel> = ArrayList()
     private lateinit var recipesListLiveData: LiveData<List<RecipeEntity>>
     private val recipeApiClient = RecipeApiClient()
     fun initialize(recipeDatabase: RecipeDatabase) {
@@ -32,10 +32,7 @@ object RecipeRepository {
 //            dbRecipesList = recipes.toModelList()
         }
     }
-//    fun initialize(recipeDatabase: RecipeDatabase) {
-//        this.recipeDatabase = recipeDatabase
-//        this.recipeDao = recipeDatabase.recipeDao()
-//    }
+
 
     suspend fun getRecipeFromApi(
         from: String,
@@ -110,6 +107,7 @@ object RecipeRepository {
     fun getRecipesSortedByRating(): List<RecipeModel> {
         return recipesList.sortedByDescending { it.userRatings.score }
     }
+
     fun getRecipesSortedByRatingAscending(): List<RecipeModel> {
         return recipesList.sortedBy { it.userRatings.score }
     }
@@ -121,8 +119,19 @@ object RecipeRepository {
         return recipesList.sortedBy { it.name }
     }
 
+    fun getRecipesSortedByRatingDatabase(): List<RecipeModel> {
+        return myRecipesList.sortedByDescending { it.userRatings.score }
+    }
+    fun getRecipesSortedByRatingAscendingDatabase(): List<RecipeModel> {
+        return myRecipesList.sortedBy { it.userRatings.score }
+    }
 
-
+    fun getRecipesSortedByNameDatabase(): List<RecipeModel> {
+        return myRecipesList.sortedByDescending { it.name }
+    }
+    fun getRecipesSortedByNameAscendingDatabase(): List<RecipeModel> {
+        return myRecipesList.sortedBy { it.name }
+    }
 
 
 }

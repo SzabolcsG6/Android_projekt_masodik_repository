@@ -26,6 +26,7 @@ class NewRecipeFragment : Fragment() {
 
     private lateinit var binding: FragmentNewRecipeBinding
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,7 +44,8 @@ class NewRecipeFragment : Fragment() {
         )
         val viewModel =
             ViewModelProvider(this, factory)[ProfileViewModel::class.java]
-
+viewModel.fetchDatabaseRecipes()
+        viewModel.fetchMyRecipesData()
         binding.saveButton.setOnClickListener {
             val recipeModel = RecipeModel(
                 id = 0, // vagy más, adataidtól függő érték
