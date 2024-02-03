@@ -4,7 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.Button
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -12,30 +13,28 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.tasty.recipesapp.R
 import com.tasty.recipesapp.databinding.FragmentProfileBinding
-import com.tasty.recipesapp.repository.RecipeRepository.getAllRecipesFromDatabase
 import com.tasty.recipesapp.repository.recipe.model.RecipeModel
 import com.tasty.recipesapp.ui.App
 import com.tasty.recipesapp.ui.recipe.viewmodel.ProfileViewModel
 import com.tasty.recipesapp.ui.profile.viewmodel.factory.ProfileViewModelFactory
 import com.tasty.recipesapp.ui.recipe.adapter.RecipesListAdapter
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
+
 
 class ProfileFragment : Fragment() {
 
 
     companion object {
-        private val TAG: String? = ProfileFragment::class.java.canonicalName
+       // private val TAG: String? = ProfileFragment::class.java.canonicalName
         const val BUNDLE_EXTRA_SELECTED_RECIPE_ID = "selected_recipe_id"
     }
 
     private lateinit var binding: FragmentProfileBinding
     private lateinit var recipesAdapter: RecipesListAdapter
     private lateinit var viewModel: ProfileViewModel
-
+    private lateinit var popupMenu: PopupMenu
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -73,7 +72,64 @@ class ProfileFragment : Fragment() {
                 "Failed to remove recipe"
             }
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show()}
+        val sortButton: Button = view.findViewById(R.id.sortButton)
+        val sortButton2: Button = view.findViewById(R.id.sortButton2)
+        val sortButton3: Button = view.findViewById(R.id.sortButton3)
+        val sortButton4: Button = view.findViewById(R.id.sortButton4)
+        val chooserButton : FloatingActionButton = view.findViewById(R.id.chooserButton)
 
+        sortButton.visibility = View.GONE
+        sortButton2.visibility = View.GONE
+        sortButton3.visibility = View.GONE
+        sortButton4.visibility = View.GONE
+        popupMenu = PopupMenu(requireContext(), chooserButton)
+        popupMenu.menuInflater.inflate(R.menu.sort_menu, popupMenu.menu)
+// Show the PopupMenu when the chooserButton is clicked
+        chooserButton.setOnClickListener {
+            popupMenu.show()
+        }
+        // Handle item click in the PopupMenu
+        popupMenu.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.sortButton -> {
+                    viewModel.getRecipesSortedByRatingDatabase()
+                    viewModel.myRecipesList.observe(viewLifecycleOwner) { recipes ->
+                        recipesAdapter.setData(recipes)
+                        recipesAdapter.notifyDataSetChanged()
+                        scrollToTop()
+                    }
+                    true // Indicate that the menu item click is handled
+                }
+                R.id.sortButton2 -> {
+                    viewModel.getRecipesSortedByRatingAscendingDatabase()
+                    viewModel.myRecipesList.observe(viewLifecycleOwner) { recipes ->
+                        recipesAdapter.setData(recipes)
+                        recipesAdapter.notifyDataSetChanged()
+                        scrollToTop()
+                    }
+                    true // Indicate that the menu item click is handled
+                }
+                R.id.sortButton3 -> {
+                    viewModel.getRecipesSortedByNameDatabase()
+                    viewModel.myRecipesList.observe(viewLifecycleOwner) { recipes ->
+                        recipesAdapter.setData(recipes)
+                        recipesAdapter.notifyDataSetChanged()
+                        scrollToTop()
+                    }
+                    true // Indicate that the menu item click is handled
+                }
+                R.id.sortButton4 -> {
+                    viewModel.getRecipesSortedByNameAscendingDatabase()
+                    viewModel.myRecipesList.observe(viewLifecycleOwner) { recipes ->
+                        recipesAdapter.setData(recipes)
+                        recipesAdapter.notifyDataSetChanged()
+                        scrollToTop()
+                    }
+                    true // Indicate that the menu item click is handled
+                }
+                else -> false // Indicate that the menu item click is not handled
+            }
+        }
     }
 
     private fun initRecyclerView() {
@@ -115,5 +171,7 @@ class ProfileFragment : Fragment() {
         )
     }
 
-
+    private fun scrollToTop() {
+        binding.recyclerView.scrollToPosition(0) // Scrolls to the top of the RecyclerView
+    }
 }

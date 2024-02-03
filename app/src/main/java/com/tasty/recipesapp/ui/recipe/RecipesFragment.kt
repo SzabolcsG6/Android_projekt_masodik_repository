@@ -2,25 +2,21 @@ package com.tasty.recipesapp.ui.recipe
 
 import android.content.Context
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.PopupMenu
-import android.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.tasty.recipesapp.R
 import com.tasty.recipesapp.databinding.FragmentRecipesBinding
-import com.tasty.recipesapp.repository.RecipeRepository
 import com.tasty.recipesapp.repository.recipe.model.RecipeModel
 import com.tasty.recipesapp.ui.recipe.adapter.RecipesListAdapter
 import com.tasty.recipesapp.ui.recipe.viewmodel.RecipeListViewModel
@@ -28,13 +24,13 @@ import com.tasty.recipesapp.ui.recipe.viewmodel.RecipeListViewModel
 class RecipesFragment : Fragment() {
 
     companion object {
-        private val TAG: String? = RecipesFragment::class.java.canonicalName
+        //private val TAG: String? = RecipesFragment::class.java.canonicalName
         const val BUNDLE_EXTRA_SELECTED_RECIPE_ID = "selected_recipe_id"
     }
     private lateinit var popupMenu: PopupMenu
     private lateinit var binding: FragmentRecipesBinding
     private lateinit var recipesAdapter: RecipesListAdapter
-    private lateinit var addToFavoritesListener: (RecipeModel) -> Unit
+    //private lateinit var addToFavoritesListener: (RecipeModel) -> Unit
     private val favoritesList = mutableListOf<RecipeModel>()
 //    val favoritesButton: Button? = view.findViewById(R.id.favoritesButton)
 //displaying favorites crashes the app somehow
@@ -59,7 +55,7 @@ class RecipesFragment : Fragment() {
         val sortButton2: Button = view.findViewById(R.id.sortButton2)
         val sortButton3: Button = view.findViewById(R.id.sortButton3)
         val sortButton4: Button = view.findViewById(R.id.sortButton4)
-        val chooserButton : Button=view.findViewById(R.id.chooserButton)
+        val chooserButton : FloatingActionButton = view.findViewById(R.id.chooserButton)
         sortButton.visibility = View.GONE
         sortButton2.visibility = View.GONE
         sortButton3.visibility = View.GONE
