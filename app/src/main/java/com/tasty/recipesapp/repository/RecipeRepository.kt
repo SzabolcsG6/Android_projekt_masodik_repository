@@ -3,6 +3,7 @@ package com.tasty.recipesapp.repository
 import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.tasty.recipesapp.api.RecipeApiClient
@@ -23,6 +24,17 @@ object RecipeRepository {
      var myRecipesList: ArrayList<RecipeModel> = ArrayList()
     private lateinit var recipesListLiveData: LiveData<List<RecipeEntity>>
     private val recipeApiClient = RecipeApiClient()
+    interface Callback {
+        fun onRecipesLoaded(recipes: List<RecipeModel>)
+        // You can define other callback methods here if needed
+    }
+
+//database
+    private val _allRecipes = MutableLiveData<List<RecipeEntity>>()
+    val allRecipes: LiveData<List<RecipeEntity>> = _allRecipes
+
+
+
     fun initialize(recipeDatabase: RecipeDatabase) {
         this.recipeDatabase = recipeDatabase
         this.recipeDao = recipeDatabase.recipeDao()
@@ -42,8 +54,10 @@ object RecipeRepository {
         recipesList = recipeApiClient.recipeService.getRecipes(from, size, tags).results.toModelList()
         return recipesList
     }
-    fun getRecipesFromDatabase(): LiveData<List<RecipeEntity>> {
-        return recipesListLiveData
+    fun getAllRecipesFromDatabase(callback: Callback) {
+        // Fetch all recipes from the database using recipeDao
+        // Assign the result to _allRecipes
+        _allRecipes.postValue(recipeDao.getAllRecipes().value)
     }
     // Update to work with LiveData
     suspend fun initializeFromDatabase() {
@@ -68,7 +82,9 @@ object RecipeRepository {
             .toModelList()
         return recipesList
     }
-
+//    fun getAllRecipesFromDatabase(): LiveData<List<RecipeEntity>> {
+//        return recipeDao.getAllRecipes()
+//    }
     fun getRecipesFromFile(context: Context): List<RecipeModel> {
         lateinit var jsonString: String
 

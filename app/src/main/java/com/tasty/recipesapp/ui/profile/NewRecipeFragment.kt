@@ -15,7 +15,7 @@ import com.tasty.recipesapp.repository.recipe.model.RecipeModel
 import com.tasty.recipesapp.repository.recipe.model.TotalTimeModel
 import com.tasty.recipesapp.repository.recipe.model.UserRatingsModel
 import com.tasty.recipesapp.ui.App
-import com.tasty.recipesapp.ui.profile.viewmodel.ProfileViewModel
+import com.tasty.recipesapp.ui.recipe.viewmodel.ProfileViewModel
 import com.tasty.recipesapp.ui.profile.viewmodel.factory.ProfileViewModelFactory
 import com.tasty.recipesapp.ui.recipe.viewmodel.RecipeListViewModel
 import kotlinx.coroutines.Dispatchers
@@ -44,7 +44,7 @@ class NewRecipeFragment : Fragment() {
         )
         val viewModel =
             ViewModelProvider(this, factory)[ProfileViewModel::class.java]
-viewModel.fetchDatabaseRecipes()
+//viewModel.fetchDatabaseRecipes()
         viewModel.fetchMyRecipesData()
         binding.saveButton.setOnClickListener {
             val recipeModel = RecipeModel(
@@ -61,11 +61,9 @@ viewModel.fetchDatabaseRecipes()
             val gson = com.google.gson.Gson()
             val jsonString = gson.toJson(recipeModel)
             val recipeEntity = RecipeEntity(json = jsonString)
-            viewModel.insertRecipe(recipeModel)
             viewModel.insertRecipeToDatabase(recipeEntity)
-//            binding.displayFavoritesButton.setOnClickListener {
-//                displayFavoriteRecipes()
-//            }
+            viewModel.insertRecipeToDatabase(recipeEntity)
+
         }
 
         viewModel.insertResult.observe(viewLifecycleOwner) {
