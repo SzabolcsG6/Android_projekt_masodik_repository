@@ -10,9 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import android.content.Context
-import androidx.lifecycle.map
 import com.tasty.recipesapp.repository.recipe.enitity.RecipeEntity
-import com.tasty.recipesapp.repository.recipe.enitity.toRecipeModel
 
 class ProfileViewModel(private val repository: RecipeRepository, private val context: Context) : ViewModel() {
 
@@ -50,12 +48,6 @@ fun getAllRecipesFromDatabase() {
         }
     })
 }
-//    fun insertRecipeToDatabase(recipe: RecipeEntity) {
-//        viewModelScope.launch {
-//            repository.insertRecipeDatabase(recipe)
-//        }
-//        fetchDatabaseRecipes()
-//    }
     fun deleteRecipe(recipe: RecipeModel) {
         viewModelScope.launch {
             // Perform delete operation
@@ -70,6 +62,43 @@ fun getAllRecipesFromDatabase() {
             _insertResult.postValue(true) // Notify observers about the successful insert
         }
     }
+
+    fun getRecipesSortedByRatingDatabase(): List<RecipeModel> {
+        return _myRecipesList.value?.sortedByDescending { it.userRatings.score } ?: emptyList()
+    }
+
+    fun getRecipesSortedByRatingAscendingDatabase(): List<RecipeModel> {
+        return _myRecipesList.value?.sortedBy { it.userRatings.score } ?: emptyList()
+    }
+
+    fun getRecipesSortedByNameDatabase(): List<RecipeModel> {
+        return _myRecipesList.value?.sortedBy { it.name } ?: emptyList()
+    }
+
+    fun getRecipesSortedByNameAscendingDatabase(): List<RecipeModel> {
+        return _myRecipesList.value?.sortedByDescending { it.name } ?: emptyList()
+    }
+
+//    fun insertRecipe(recipe: RecipeEntity) {
+//        viewModelScope.launch {
+//            val isSuccessFull = withContext(Dispatchers.IO) {
+//                repository.insertRecipe(recipe)
+//            }
+//            insertResult.value = isSuccessFull
+//        }
+//    }
+//
+//    /**
+//     * Delete from database.
+//     */
+//    fun deleteRecipe(recipe: RecipeEntity) {
+//        viewModelScope.launch {
+//            val isSuccessFull = withContext(Dispatchers.IO) {
+//                repository.deleteRecipe(recipe)
+//            }
+//            deleteResult.value = isSuccessFull
+//        }
+//    }
     // Fetch favorite recipes from repository and update LiveData
 //    fun fetchFavoriteRecipes() {
 //        val favoriteRecipesFromRepo = repository.getFavoriteRecipes()
@@ -147,39 +176,6 @@ fun getAllRecipesFromDatabase() {
     /**
      * Insert into database.
      */
-    fun getRecipesSortedByRatingDatabase(): List<RecipeModel> {
-        return RecipeRepository.myRecipesList.sortedByDescending { it.userRatings.score }
-    }
-    fun getRecipesSortedByRatingAscendingDatabase(): List<RecipeModel> {
-        return RecipeRepository.myRecipesList.sortedBy { it.userRatings.score }
-    }
-
-    fun getRecipesSortedByNameDatabase(): List<RecipeModel> {
-        return RecipeRepository.myRecipesList.sortedByDescending { it.name }
-    }
-    fun getRecipesSortedByNameAscendingDatabase(): List<RecipeModel> {
-        return RecipeRepository.myRecipesList.sortedBy { it.name }
-    }
-//    fun insertRecipe(recipe: RecipeEntity) {
-//        viewModelScope.launch {
-//            val isSuccessFull = withContext(Dispatchers.IO) {
-//                repository.insertRecipe(recipe)
-//            }
-//            insertResult.value = isSuccessFull
-//        }
-//    }
-//
-//    /**
-//     * Delete from database.
-//     */
-//    fun deleteRecipe(recipe: RecipeEntity) {
-//        viewModelScope.launch {
-//            val isSuccessFull = withContext(Dispatchers.IO) {
-//                repository.deleteRecipe(recipe)
-//            }
-//            deleteResult.value = isSuccessFull
-//        }
-//    }
 }
 
 

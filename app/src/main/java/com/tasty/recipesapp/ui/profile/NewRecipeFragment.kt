@@ -62,7 +62,7 @@ class NewRecipeFragment : Fragment() {
             val jsonString = gson.toJson(recipeModel)
             val recipeEntity = RecipeEntity(json = jsonString)
             viewModel.insertRecipeToDatabase(recipeEntity)
-            viewModel.insertRecipeToDatabase(recipeEntity)
+
 
         }
 
