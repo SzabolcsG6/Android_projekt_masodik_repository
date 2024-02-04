@@ -65,7 +65,7 @@ class ProfileViewModel(private val repository: RecipeRepository, private val con
 //        }
 //    })
 //}
-    fun deleteRecipe(recipe: RecipeModel) {
+    fun deleteRecipe(recipe: RecipeEntity) {
         viewModelScope.launch {
             // Perform delete operation
             RecipeRepository.deleteRecipe(recipe)
