@@ -10,10 +10,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import android.content.Context
+import android.util.Log
 import com.tasty.recipesapp.repository.recipe.enitity.RecipeEntity
 
 class ProfileViewModel(private val repository: RecipeRepository, private val context: Context) : ViewModel() {
-
+    private val _recipes = MutableLiveData<List<RecipeEntity>>()
+    val recipes: LiveData<List<RecipeEntity>> = _recipes
     private val _favoriteRecipes = MutableLiveData<List<RecipeModel>>()
     val favoriteRecipes: LiveData<List<RecipeModel>> get() = _favoriteRecipes
     private val _myRecipesList: MutableLiveData<List<RecipeModel>> = MutableLiveData()
@@ -32,7 +34,22 @@ class ProfileViewModel(private val repository: RecipeRepository, private val con
             _myRecipesList.value = myRecipes
         }
     }
-//    fun fetchDatabaseRecipes() {
+    fun fetchRecipesFromDatabase() {
+        viewModelScope.launch {
+            try {
+                val recipesFromDb = repository.getAllRecipesFromDatabase()
+                recipesFromDb.observeForever { recipes ->
+                    _recipes.postValue(recipes)
+                }
+            } catch (e: Exception) {
+                // Handle the exception or log it
+                Log.e("ProfileViewModel", "Error fetching recipes from database: ${e.message}")
+            }
+        }
+    }
+
+
+    //    fun fetchDatabaseRecipes() {
 //        viewModelScope.launch {
 //            // Use the getRecipesFromDatabase method to load recipes from the local database
 //            val databaseRecipes = withContext(Dispatchers.IO) {
@@ -41,13 +58,13 @@ class ProfileViewModel(private val repository: RecipeRepository, private val con
 //            _myRecipesList.value = databaseRecipes.map { it.toRecipeModel() }
 //        }
 //    }
-fun getAllRecipesFromDatabase() {
-    repository.getAllRecipesFromDatabase(object : RecipeRepository.Callback {
-        override fun onRecipesLoaded(recipes: List<RecipeModel>) {
-            _myRecipesList.value = recipes
-        }
-    })
-}
+//fun getAllRecipesFromDatabase() {
+//    repository.getAllRecipesFromDatabase(object : RecipeRepository.Callback {
+//        override fun onRecipesLoaded(recipes: List<RecipeModel>) {
+//            _myRecipesList.value = recipes
+//        }
+//    })
+//}
     fun deleteRecipe(recipe: RecipeModel) {
         viewModelScope.launch {
             // Perform delete operation

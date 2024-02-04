@@ -54,11 +54,17 @@ object RecipeRepository {
         recipesList = recipeApiClient.recipeService.getRecipes(from, size, tags).results.toModelList()
         return recipesList
     }
-    fun getAllRecipesFromDatabase(callback: Callback) {
-        // Fetch all recipes from the database using recipeDao
-        // Assign the result to _allRecipes
-        _allRecipes.postValue(recipeDao.getAllRecipes().value)
+
+     fun getAllRecipesFromDatabase(): LiveData<List<RecipeEntity>> {
+        // Assuming you have a DAO object called recipeDao
+        return recipeDao.getAllRecipes()
     }
+
+//    fun getAllRecipesFromDatabase() {
+//        // Fetch all recipes from the database using recipeDao
+//        // Assign the result to _allRecipes
+//        _allRecipes.postValue(recipeDao.getAllRecipes().value)
+//    }
     // Update to work with LiveData
     suspend fun initializeFromDatabase() {
         // Initialize recipesList from the database, create a new list
@@ -111,14 +117,14 @@ object RecipeRepository {
     fun getRecipe(recipeId: Int): RecipeModel? {
         return recipesList.find { it.id == recipeId }
     }
-
-
-    fun insertRecipe(recipeModel: RecipeModel) = myRecipesList.add(recipeModel)
     suspend fun insertRecipeDatabase(recipe: RecipeEntity) {
         recipeDao.insertRecipe(recipe)
         Log.d("Database-", "Inserted")
     }
-    fun deleteRecipe(recipeModel: RecipeModel) = myRecipesList.remove(recipeModel)
+    suspend fun deleteRecipe(recipe: RecipeEntity) {
+        recipeDao.deleteRecipe(recipe)
+        Log.d("Recipe-", "Deleted")
+    }
     fun getMyRecipes() = myRecipesList
     fun getRecipesSortedByRating(): List<RecipeModel> {
         return recipesList.sortedByDescending { it.userRatings.score }

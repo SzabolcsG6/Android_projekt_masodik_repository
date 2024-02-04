@@ -54,8 +54,8 @@ class ProfileFragment : Fragment() {
         val factory = ProfileViewModelFactory((activity?.application as App).repository, requireContext())
         viewModel = ViewModelProvider(this, factory)[ProfileViewModel::class.java]
 
-        viewModel.fetchMyRecipesData()
-        viewModel.getAllRecipesFromDatabase()
+       // viewModel.fetchMyRecipesData()
+        viewModel.fetchRecipesFromDatabase()
 
         viewModel.myRecipesList.observe(viewLifecycleOwner) { myRecipes ->
             recipesAdapter.setData(myRecipes)
