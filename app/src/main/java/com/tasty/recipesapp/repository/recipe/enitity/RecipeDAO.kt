@@ -24,8 +24,8 @@ interface RecipeDAO {
 //    @Insert(onConflict = OnConflictStrategy.REPLACE)
 //    suspend fun insertFavoriteRecipe(recipe: RecipeEntity)
 //
-    @Query("DELETE FROM recipe WHERE internalId = :id")
-    suspend fun deleteRecipe(id: Int) : RecipeEntity?
+//    @Query("DELETE FROM recipe WHERE internalId = :id")
+//    suspend fun deleteRecipe(id: Int) : RecipeEntity?
 
 //    @Query("SELECT * FROM recipe WHERE isFavorite = 1")
 //    suspend fun getAllFavoriteRecipes(): List<RecipeEntity>

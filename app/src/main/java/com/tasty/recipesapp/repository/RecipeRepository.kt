@@ -59,24 +59,6 @@ object RecipeRepository {
         // Assuming you have a DAO object called recipeDao
         return recipeDao.getAllRecipes()
     }
-
-//    fun getAllRecipesFromDatabase() {
-//        // Fetch all recipes from the database using recipeDao
-//        // Assign the result to _allRecipes
-//        _allRecipes.postValue(recipeDao.getAllRecipes().value)
-//    }
-    // Update to work with LiveData
-    suspend fun initializeFromDatabase() {
-        // Initialize recipesList from the database, create a new list
-//        val recipesFromDatabase = recipeDao.getAllRecipes().toModelList()
-//        dbRecipesList = recipesFromDatabase
-    }
-//    suspend fun getRecipesFromDatabase(): List<RecipeEntity> {
-//        return recipeDao.getAllRecipes()
-//    }
-//    suspend fun initializeFromDatabase() {
-//        recipesList = recipeDao.getAllRecipes().toModelList()
-//    }
     suspend fun searchRecipesFromApi(
         from: String,
         size: String,
@@ -88,9 +70,6 @@ object RecipeRepository {
             .toModelList()
         return recipesList
     }
-//    fun getAllRecipesFromDatabase(): LiveData<List<RecipeEntity>> {
-//        return recipeDao.getAllRecipes()
-//    }
     fun getRecipesFromFile(context: Context): List<RecipeModel> {
         lateinit var jsonString: String
 

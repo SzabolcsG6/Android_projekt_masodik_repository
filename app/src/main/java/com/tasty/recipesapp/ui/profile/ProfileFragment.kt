@@ -137,7 +137,7 @@ class ProfileFragment : Fragment() {
             ArrayList(),
             requireContext(),
             onItemClickListener = { recipe -> navigateToRecipeDetail(recipe) },
-            onItemLongClickListener = { recipe -> viewModel.deleteRecipe(recipe) },
+           // onItemLongClickListener = { recipe -> viewModel.deleteRecipe(recipe) },
             onAddToFavoritesClick = {}
         )
 

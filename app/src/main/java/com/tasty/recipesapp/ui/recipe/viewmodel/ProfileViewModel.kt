@@ -16,8 +16,8 @@ import com.tasty.recipesapp.repository.recipe.enitity.RecipeEntity
 class ProfileViewModel(private val repository: RecipeRepository, private val context: Context) : ViewModel() {
     private val _recipes = MutableLiveData<List<RecipeEntity>>()
     val recipes: LiveData<List<RecipeEntity>> = _recipes
-    private val _favoriteRecipes = MutableLiveData<List<RecipeModel>>()
-    val favoriteRecipes: LiveData<List<RecipeModel>> get() = _favoriteRecipes
+    //private val _favoriteRecipes = MutableLiveData<List<RecipeModel>>()
+   // val favoriteRecipes: LiveData<List<RecipeModel>> get() = _favoriteRecipes
     private val _myRecipesList: MutableLiveData<List<RecipeModel>> = MutableLiveData()
     val myRecipesList: LiveData<List<RecipeModel>> get() = _myRecipesList
     private val _insertResult = MutableLiveData<Boolean>()
@@ -47,24 +47,6 @@ class ProfileViewModel(private val repository: RecipeRepository, private val con
             }
         }
     }
-
-
-    //    fun fetchDatabaseRecipes() {
-//        viewModelScope.launch {
-//            // Use the getRecipesFromDatabase method to load recipes from the local database
-//            val databaseRecipes = withContext(Dispatchers.IO) {
-//                repository.getRecipesFromDatabase()
-//            }
-//            _myRecipesList.value = databaseRecipes.map { it.toRecipeModel() }
-//        }
-//    }
-//fun getAllRecipesFromDatabase() {
-//    repository.getAllRecipesFromDatabase(object : RecipeRepository.Callback {
-//        override fun onRecipesLoaded(recipes: List<RecipeModel>) {
-//            _myRecipesList.value = recipes
-//        }
-//    })
-//}
     fun deleteRecipe(recipe: RecipeEntity) {
         viewModelScope.launch {
             // Perform delete operation
@@ -96,103 +78,6 @@ class ProfileViewModel(private val repository: RecipeRepository, private val con
         return _myRecipesList.value?.sortedByDescending { it.name } ?: emptyList()
     }
 
-//    fun insertRecipe(recipe: RecipeEntity) {
-//        viewModelScope.launch {
-//            val isSuccessFull = withContext(Dispatchers.IO) {
-//                repository.insertRecipe(recipe)
-//            }
-//            insertResult.value = isSuccessFull
-//        }
-//    }
-//
-//    /**
-//     * Delete from database.
-//     */
-//    fun deleteRecipe(recipe: RecipeEntity) {
-//        viewModelScope.launch {
-//            val isSuccessFull = withContext(Dispatchers.IO) {
-//                repository.deleteRecipe(recipe)
-//            }
-//            deleteResult.value = isSuccessFull
-//        }
-//    }
-    // Fetch favorite recipes from repository and update LiveData
-//    fun fetchFavoriteRecipes() {
-//        val favoriteRecipesFromRepo = repository.getFavoriteRecipes()
-//        _favoriteRecipes.postValue(favoriteRecipesFromRepo)
-//    }
-//
-//    // Add a favorite recipe to the list and update LiveData
-//    fun addFavoriteRecipe(recipe: RecipeModel) {
-//        repository.addToFavorites(recipe)
-//        fetchFavoriteRecipes() // Update the list after adding
-//    }
-//
-//    // Remove a favorite recipe from the list and update LiveData
-//    fun removeFavoriteRecipe(recipe: RecipeModel) {
-//        repository.removeFromFavorites(recipe)
-//        fetchFavoriteRecipes() // Update the list after removing
-//    }
-//just a test to display favorites
-
-//    // Other methods for profile-related functionalities
-//    private val _databaseRecipesList = MutableLiveData<List<RecipeEntity>>()
-//    val databaseRecipesList: LiveData<List<RecipeEntity>> get() = _databaseRecipesList
-//
-//
-//    // Live data members
-//    var myRecipesList: MutableLiveData<List<RecipeModel>> =
-//        MutableLiveData()
-//
-//    var insertResult: MutableLiveData<Boolean> =
-//        MutableLiveData()
-//
-//    var deleteResult: MutableLiveData<Boolean> =
-//        MutableLiveData()
-//    init {
-//        viewModelScope.launch {
-//            repository.initializeFromDatabase()
-//        }
-//    }
-//
-//    fun fetchMyRecipesData() {
-//        val recipes = repository.getMyRecipes()
-//        myRecipesList.value = recipes
-//    }
-//
-//    /**
-//     * Insert into repo's list.
-//     */
-//    fun insertRecipe(recipe: RecipeModel) {
-//        val result = repository.insertRecipe(recipe)
-//
-//        insertResult.value = result
-//        fetchMyRecipesData()
-//    }
-//
-//
-//
-//    fun deleteRecipe(recipe: RecipeModel) {
-//        val result = repository.deleteRecipe(recipe)
-//        deleteResult.value = result
-//    }
-//
-//    fun fetchDatabaseRecipes() {
-//        viewModelScope.launch {
-//            // Use the getRecipesFromDatabase method to load recipes from the local database
-//            val databaseRecipes = withContext(Dispatchers.IO) {
-//                repository.getRecipesFromDatabase()
-//            }
-//            databaseRecipes.observeForever { databaseRecipes ->
-//                _databaseRecipesList.postValue(databaseRecipes)
-//            }
-//        }
-//    }
-//
-
-    /**
-     * Insert into database.
-     */
 }
 
 
