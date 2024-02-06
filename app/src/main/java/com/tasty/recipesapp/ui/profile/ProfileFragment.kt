@@ -162,13 +162,7 @@ viewModel.myRecipesList
             )
         )
     }
-//    private fun listAllRecipes(recipe: List<RecipeModel>) {
-//        println("All Recipes:")
-//        recipe.forEachIndexed { index, recipe ->
-//            println("$index: ${recipe.name} - ${recipe.description}")
-//            // Print other details as needed
-//        }
-//    }
+
 
     private fun navigateToRecipeDetail(recipe: RecipeModel) {
         findNavController().navigate(
