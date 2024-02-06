@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-android")
     id("kotlin-kapt")
+    id("com.google.devtools.ksp") version "1.8.10-1.0.9" apply false
 }
 
 android {
@@ -38,16 +39,21 @@ android {
 }
 
 dependencies {
-    val nav_version = "2.7.4"
+    val nav_version = "2.7.6"
 
-    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.10.0")
+    implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
+
+        implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+        implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
+        implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
+        implementation("androidx.lifecycle:lifecycle-common-java8:2.7.0")
     //Navigation graph
     // Kotlin
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
@@ -63,7 +69,7 @@ dependencies {
     // Glide
     implementation("com.github.bumptech.glide:glide:4.11.0")
     //Bottom Menu
-    implementation ("com.google.android.material:material:1.11.0-alpha01")
+    implementation ("com.google.android.material:material:1.12.0-alpha03")
 
     val room_version = "2.6.1"
     implementation("androidx.room:room-runtime:$room_version")

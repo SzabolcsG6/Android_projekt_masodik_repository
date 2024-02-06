@@ -1,3 +1,5 @@
+@file:Suppress("NAME_SHADOWING")
+
 package com.tasty.recipesapp.ui.recipe.adapter
 
 import android.content.ContentValues
@@ -16,8 +18,8 @@ import com.tasty.recipesapp.databinding.RecipeListItemBinding
 import com.tasty.recipesapp.repository.recipe.model.RecipeModel
 
 class RecipesListAdapter (
-    private var recipesList: List<RecipeModel>,
-    private val context: Context,
+    private val recipesList: MutableList<RecipeModel> = mutableListOf(),
+            private val context: Context,
     private val onItemClickListener: (RecipeModel) -> Unit,
     private val onItemLongClickListener: (RecipeModel) -> Unit = {},
     private val onAddToFavoritesClick: (RecipeModel) -> Unit // New callback
@@ -61,12 +63,11 @@ class RecipesListAdapter (
 
     }
 
-    /**
-     * Update the list.
-     */
     fun setData(newList: List<RecipeModel>) {
-        recipesList = newList
+
+        recipesList.addAll(newList) // Add all elements from the new list
     }
+
 
     inner class RecipeItemViewHolder(binding: RecipeListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {

@@ -4,12 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
-import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import java.util.concurrent.Flow
 
 @Dao
-interface RecipeDAO {
+public interface RecipeDAO {
     @Insert
     suspend fun insertRecipe(recipe: RecipeEntity)
     @Query("SELECT * FROM recipe WHERE internalId = :id")
@@ -19,8 +17,8 @@ interface RecipeDAO {
     suspend fun deleteRecipe(recipe: RecipeEntity)
     @Query("SELECT * FROM recipe")
     fun getAllRecipesLiveData(): LiveData<List<RecipeEntity>>
-    @Query("SELECT * FROM recipe")
-    fun getAllRecipes(): LiveData<List<RecipeEntity>>
+
+
 //    @Insert(onConflict = OnConflictStrategy.REPLACE)
 //    suspend fun insertFavoriteRecipe(recipe: RecipeEntity)
 //

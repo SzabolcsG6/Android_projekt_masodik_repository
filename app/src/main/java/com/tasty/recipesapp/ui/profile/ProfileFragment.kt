@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.tasty.recipesapp.R
 import com.tasty.recipesapp.databinding.FragmentProfileBinding
+import com.tasty.recipesapp.repository.recipe.RecipeDatabase
 import com.tasty.recipesapp.repository.recipe.model.RecipeModel
 import com.tasty.recipesapp.ui.App
 import com.tasty.recipesapp.ui.recipe.viewmodel.ProfileViewModel
@@ -35,10 +36,11 @@ class ProfileFragment : Fragment() {
     private lateinit var recipesAdapter: RecipesListAdapter
     private lateinit var viewModel: ProfileViewModel
     private lateinit var popupMenu: PopupMenu
+    private val database by lazy { RecipeDatabase.getDatabase(requireContext()) }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
         initRecyclerView()
         binding.addButton.setOnClickListener {
@@ -50,15 +52,20 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Pass the context when creating the ViewModel
-        val factory = ProfileViewModelFactory((activity?.application as App).repository, requireContext())
+      //   Pass the context when creating the ViewModel
+        val factory = ProfileViewModelFactory(
+            (activity?.application as App).repository)
         viewModel = ViewModelProvider(this, factory)[ProfileViewModel::class.java]
 
-       // viewModel.fetchMyRecipesData()
-        viewModel.fetchRecipesFromDatabase()
+       // viewModel.loadRecipes()
+viewModel.myRecipesList
+        //Filebol receptek
+//viewModel.fetchMyRecipesData()
+
 
         viewModel.myRecipesList.observe(viewLifecycleOwner) { myRecipes ->
             recipesAdapter.setData(myRecipes)
+
             recipesAdapter.notifyItemRangeChanged(0, myRecipes.lastIndex)
 
 
@@ -72,6 +79,10 @@ class ProfileFragment : Fragment() {
                 "Failed to remove recipe"
             }
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show()}
+
+        viewModel.fetchRecipesFromDatabase()
+
+
         val sortButton: Button = view.findViewById(R.id.sortButton)
         val sortButton2: Button = view.findViewById(R.id.sortButton2)
         val sortButton3: Button = view.findViewById(R.id.sortButton3)
@@ -130,6 +141,7 @@ class ProfileFragment : Fragment() {
                 else -> false // Indicate that the menu item click is not handled
             }
         }
+      //  viewModel.fetchRecipesFromDatabase()
     }
 
     private fun initRecyclerView() {
@@ -150,13 +162,13 @@ class ProfileFragment : Fragment() {
             )
         )
     }
-    private fun listAllRecipes(recipe: List<RecipeModel>) {
-        println("All Recipes:")
-        recipe.forEachIndexed { index, recipe ->
-            println("$index: ${recipe.name} - ${recipe.description}")
-            // Print other details as needed
-        }
-    }
+//    private fun listAllRecipes(recipe: List<RecipeModel>) {
+//        println("All Recipes:")
+//        recipe.forEachIndexed { index, recipe ->
+//            println("$index: ${recipe.name} - ${recipe.description}")
+//            // Print other details as needed
+//        }
+//    }
 
     private fun navigateToRecipeDetail(recipe: RecipeModel) {
         findNavController().navigate(
