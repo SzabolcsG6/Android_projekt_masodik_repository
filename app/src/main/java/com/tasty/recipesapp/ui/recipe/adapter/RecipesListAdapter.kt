@@ -22,7 +22,8 @@ class RecipesListAdapter (
             private val context: Context,
     private val onItemClickListener: (RecipeModel) -> Unit,
     private val onItemLongClickListener: (RecipeModel) -> Unit = {},
-    private val onAddToFavoritesClick: (RecipeModel) -> Unit // New callback
+    private val onAddToFavoritesClick: (RecipeModel) -> Unit, // New callback
+    private val onDeleteClickListener: (RecipeModel) -> Unit // New callback
 ) : RecyclerView.Adapter<RecipesListAdapter.RecipeItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeItemViewHolder {
@@ -58,6 +59,13 @@ class RecipesListAdapter (
             val currentRecipe = recipesList[currentPosition]
             onAddToFavoritesClick(currentRecipe) // Invoke the callback
         }
+        holder.deleteButton.setOnClickListener {
+            val currentPosition = holder.adapterPosition
+            val currentRecipe = recipesList[currentPosition]
+            onDeleteClickListener(currentRecipe) // Invoke the callback
+            recipesList.removeAt(currentPosition) // Remove the item from the list
+            notifyItemRemoved(currentPosition) // Notify the adapter of the removal
+        }
 
 
 
@@ -77,7 +85,7 @@ class RecipesListAdapter (
         val recipeImageView : ImageView = binding.recipeImageView
         val recipeRatingsView: TextView = binding.recipeRatingsView
         val btnAddToFavorites: ImageButton = binding.btnAddToFavorites
-
+val deleteButton: ImageButton=binding.deleteButton
 
 
         init {

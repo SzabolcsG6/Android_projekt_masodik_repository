@@ -88,11 +88,15 @@ viewModel.myRecipesList
         val sortButton3: Button = view.findViewById(R.id.sortButton3)
         val sortButton4: Button = view.findViewById(R.id.sortButton4)
         val chooserButton : FloatingActionButton = view.findViewById(R.id.chooserButton)
+//        val favoritesButton: Button = view.findViewById(R.id.favoritesButton)
 
+chooserButton.visibility=View.GONE
         sortButton.visibility = View.GONE
         sortButton2.visibility = View.GONE
         sortButton3.visibility = View.GONE
         sortButton4.visibility = View.GONE
+        //favoritesButton.visibility.View.GONE
+
         popupMenu = PopupMenu(requireContext(), chooserButton)
         popupMenu.menuInflater.inflate(R.menu.sort_menu, popupMenu.menu)
 // Show the PopupMenu when the chooserButton is clicked
@@ -150,7 +154,11 @@ viewModel.myRecipesList
             requireContext(),
             onItemClickListener = { recipe -> navigateToRecipeDetail(recipe) },
            // onItemLongClickListener = { recipe -> viewModel.deleteRecipe(recipe) },
-            onAddToFavoritesClick = {}
+            onAddToFavoritesClick = {},
+            onDeleteClickListener = { recipe ->
+                // Delete the recipe from the database
+                viewModel.deleteRecipe(recipe)
+            }
         )
 
         binding.recyclerView.adapter = recipesAdapter
@@ -161,6 +169,7 @@ viewModel.myRecipesList
                 DividerItemDecoration.VERTICAL
             )
         )
+
     }
 
 

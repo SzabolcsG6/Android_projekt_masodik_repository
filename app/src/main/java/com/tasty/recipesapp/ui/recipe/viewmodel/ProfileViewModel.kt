@@ -77,6 +77,11 @@ class ProfileViewModel(private val repository: RecipeRepository) : ViewModel() {
 //            _insertResult.postValue(true) // Notify observers about the successful insert
 //        }
 //    }
+    fun deleteRecipe(recipe: RecipeModel) {
+        viewModelScope.launch {
+            repository.deleteRecipe(recipe)
+        }
+    }
 suspend fun insertRecipeToDatabase(recipe: RecipeEntity) {
     repository.insertRecipeDatabase(recipe)
 }

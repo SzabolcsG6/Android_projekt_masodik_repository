@@ -93,6 +93,17 @@ object RecipeRepository {
         return recipesList
 
     }
+    suspend fun deleteRecipe(recipe: RecipeModel) {
+        withContext(Dispatchers.IO) {
+            val json = Gson().toJson(recipe)
+            val recipeEntity = RecipeEntity(json = json)
+            recipeDao.deleteRecipe(recipeEntity)
+        }
+    }
+
+
+
+
 
 
     fun getRecipe(recipeId: Int): RecipeModel? {

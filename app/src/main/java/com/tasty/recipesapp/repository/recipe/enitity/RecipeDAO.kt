@@ -19,9 +19,6 @@ public interface RecipeDAO {
     fun getAllRecipesLiveData(): LiveData<List<RecipeEntity>>
 
 
-//    @Insert(onConflict = OnConflictStrategy.REPLACE)
-//    suspend fun insertFavoriteRecipe(recipe: RecipeEntity)
-//
 
 
 //    @Query("SELECT * FROM recipe WHERE isFavorite = 1")

@@ -32,6 +32,7 @@ class RecipesFragment : Fragment() {
     private lateinit var recipesAdapter: RecipesListAdapter
     //private lateinit var addToFavoritesListener: (RecipeModel) -> Unit
     private val favoritesList = mutableListOf<RecipeModel>()
+
 //    val favoritesButton: Button? = view.findViewById(R.id.favoritesButton)
 //displaying favorites crashes the app somehow
 
@@ -56,6 +57,11 @@ class RecipesFragment : Fragment() {
         val sortButton3: Button = view.findViewById(R.id.sortButton3)
         val sortButton4: Button = view.findViewById(R.id.sortButton4)
         val chooserButton : FloatingActionButton = view.findViewById(R.id.chooserButton)
+        val favoritesButton : Button = view.findViewById(R.id.favoritesButton)
+//        val deleteButton : Button = view.findViewById(R.id.deleteButton)
+//
+//        deleteButton.visibility=View.GONE
+        favoritesButton.visibility = View.GONE
         sortButton.visibility = View.GONE
         sortButton2.visibility = View.GONE
         sortButton3.visibility = View.GONE
@@ -139,7 +145,8 @@ class RecipesFragment : Fragment() {
             onAddToFavoritesClick = { recipe ->
                 // Handle adding the recipe to favorites here
                 addToFavorites(recipe)
-            }
+            },
+            onDeleteClickListener = { }
         )
 
         binding.recyclerView.adapter = recipesAdapter
