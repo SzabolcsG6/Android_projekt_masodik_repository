@@ -22,9 +22,6 @@ import androidx.lifecycle.viewModelScope
 class NewRecipeFragment : Fragment() {
 
     private lateinit var binding: FragmentNewRecipeBinding
-//    val recipeDatabase = RecipeDatabase.getDatabase(requireContext()) // Assuming RecipeDatabase is a singleton
-//    val recipeDao = recipeDatabase.recipeDao() // Get an instance of RecipeDAO from the database
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,8 +38,7 @@ class NewRecipeFragment : Fragment() {
             (activity?.application as App).repository)
         val viewModel =
             ViewModelProvider(this, factory)[ProfileViewModel::class.java]
-//viewModel.fetchDatabaseRecipes()
-        //viewModel.fetchMyRecipesData()
+
         binding.saveButton.setOnClickListener {
             val recipeModel = RecipeModel(
                 id = 0, // vagy más, adataidtól függő érték
@@ -82,24 +78,7 @@ class NewRecipeFragment : Fragment() {
     private fun navigateBack() {
         findNavController().popBackStack()
     }
-//    private fun displayFavoriteRecipes() {
-////         val sharedPreferences = requireContext().getSharedPreferences("Favorites", Context.MODE_PRIVATE)
-////        val favoriteRecipeIds = sharedPreferences.getStringSet("favoriteRecipeIds", setOf()) ?: setOf()
-////
-////        // Assuming you have a predefined list of recipes or a method to fetch them
-////        val allRecipes = getAllRecipesFromApi() // Replace this with your method to get recipes
-////
-////        // Filter the recipes to display only the favorites
-////        val favoriteRecipes = allRecipes.filter { it.id.toString() in favoriteRecipeIds }
-////
-////        if (favoriteRecipes.isNotEmpty()) {
-////            // Example: Show favorite recipe names in a toast
-////            val favoriteRecipeNames = favoriteRecipes.joinToString(separator = "\n") { it.name }
-////            Toast.makeText(requireContext(), "Favorite Recipes:\n$favoriteRecipeNames", Toast.LENGTH_LONG).show()
-////        } else {
-////            Toast.makeText(requireContext(), "No favorite recipes found", Toast.LENGTH_SHORT).show()
-////        }
-//    }
+
 
 
 

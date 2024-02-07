@@ -18,8 +18,8 @@ import com.tasty.recipesapp.databinding.RecipeListItemBinding
 import com.tasty.recipesapp.repository.recipe.model.RecipeModel
 
 class RecipesListAdapter (
-    private val recipesList: MutableList<RecipeModel> = mutableListOf(),
-            private val context: Context,
+    private var recipesList: MutableList<RecipeModel> = mutableListOf(),
+    private val context: Context,
     private val onItemClickListener: (RecipeModel) -> Unit,
     private val onItemLongClickListener: (RecipeModel) -> Unit = {},
     private val onAddToFavoritesClick: (RecipeModel) -> Unit, // New callback
@@ -75,11 +75,10 @@ class RecipesListAdapter (
 
         recipesList.addAll(newList) // Add all elements from the new list
     }
+    fun setData2(newList: List<RecipeModel>) {
+        recipesList = newList.toMutableList()
+    }
 
-//    fun setDataSearch(newRecipes: List<RecipeModel>) {
-//        newRecipes = emptyList<>()
-//        notifyDataSetChanged()
-//    }
     inner class RecipeItemViewHolder(binding: RecipeListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 

@@ -78,7 +78,7 @@ class RecipesFragment : Fragment() {
                 R.id.sortButton -> {
                     viewModel.sortRecipesByRating()
                     viewModel.recipeList.observe(viewLifecycleOwner) { recipes ->
-                        recipesAdapter.setData(recipes)
+                        recipesAdapter.setData2(recipes)
                         recipesAdapter.notifyDataSetChanged()
                         scrollToTop()
                     }
@@ -87,7 +87,7 @@ class RecipesFragment : Fragment() {
                 R.id.sortButton2 -> {
                     viewModel.sortRecipesByRatingAscending()
                     viewModel.recipeList.observe(viewLifecycleOwner) { recipes ->
-                        recipesAdapter.setData(recipes)
+                        recipesAdapter.setData2(recipes)
                         recipesAdapter.notifyDataSetChanged()
                         scrollToTop()
                     }
@@ -96,7 +96,7 @@ class RecipesFragment : Fragment() {
                 R.id.sortButton3 -> {
                     viewModel.sortRecipesByName()
                     viewModel.recipeList.observe(viewLifecycleOwner) { recipes ->
-                        recipesAdapter.setData(recipes)
+                        recipesAdapter.setData2(recipes)
                         recipesAdapter.notifyDataSetChanged()
                         scrollToTop()
                     }
@@ -105,7 +105,7 @@ class RecipesFragment : Fragment() {
                 R.id.sortButton4 -> {
                     viewModel.sortRecipesByNameAscending()
                     viewModel.recipeList.observe(viewLifecycleOwner) { recipes ->
-                        recipesAdapter.setData(recipes)
+                        recipesAdapter.setData2(recipes)
                         recipesAdapter.notifyDataSetChanged()
                         scrollToTop()
                     }

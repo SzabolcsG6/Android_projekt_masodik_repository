@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.tasty.recipesapp.repository.RecipeRepository
+import com.tasty.recipesapp.repository.recipe.enitity.FavoriteEntity
 import com.tasty.recipesapp.repository.recipe.model.RecipeModel
 import com.tasty.recipesapp.repository.recipe.enitity.RecipeEntity
 import kotlinx.coroutines.launch
@@ -24,10 +25,17 @@ class ProfileViewModel(private val repository: RecipeRepository) : ViewModel() {
     private val _searchResults = MutableLiveData<List<RecipeModel>>()
     val searchResults: LiveData<List<RecipeModel>> = _searchResults
 
-//display recipes from database
+
+    private val _favoriteRecipes = MutableLiveData<List<RecipeModel>>()
+    val favoriteRecipes: LiveData<List<RecipeModel>> get() = _favoriteRecipes
+
+    //display recipes from database
     private val _recipeListLiveData = MutableLiveData<List<RecipeEntity>>()
     val recipeListLiveData: LiveData<List<RecipeEntity>> get() = _recipeListLiveData
 
+
+
+    //File-bol receptek
 //    fun fetchMyRecipesData() {
 //        viewModelScope.launch {
 //            // Use the getRecipesFromFile method to load recipes from the file
@@ -37,6 +45,9 @@ class ProfileViewModel(private val repository: RecipeRepository) : ViewModel() {
 //            _myRecipesList.value = myRecipes
 //        }
 //    }
+
+
+
 //fun searchRecipes(query: String) {
 //    viewModelScope.launch {
 //        val results = repository.searchRecipes(query)
@@ -64,26 +75,6 @@ class ProfileViewModel(private val repository: RecipeRepository) : ViewModel() {
         }
     }
 
-
-    //    fun loadRecipes() {
-//        viewModelScope.launch {
-//            _recipeListLiveData.value = recipeDAO.getAllRecipes()
-//        }
-//    }
-//    fun deleteRecipe(recipe: RecipeEntity) {
-//        viewModelScope.launch {
-//            // Perform delete operation
-//            RecipeRepository.deleteRecipe(recipe)
-//            _deleteResult.value = true
-//        }}
-//    } fun insertRecipeToDatabase(recipe: RecipeEntity) {
-//        viewModelScope.launch {
-//            withContext(Dispatchers.IO) {
-//                repository.insertRecipeDatabase(recipe)
-//            }
-//            _insertResult.postValue(true) // Notify observers about the successful insert
-//        }
-//    }
     fun deleteRecipe(recipe: RecipeModel) {
         viewModelScope.launch {
             repository.deleteRecipe(recipe)
@@ -111,6 +102,30 @@ suspend fun insertRecipeToDatabase(recipe: RecipeEntity) {
 
     fun getRecipesSortedByNameAscendingDatabase(): List<RecipeModel> {
         return _myRecipesList.value?.sortedByDescending { it.name } ?: emptyList()
+    }
+
+
+    // Insert favorite recipe to database
+    fun insertFavoriteRecipe(recipe: RecipeModel) {
+        val favoriteEntity = FavoriteEntity.fromRecipeModel(recipe)
+        repository.insertFavoriteRecipe(favoriteEntity)
+    }
+
+
+    // Delete favorite recipe from database
+    fun deleteFavoriteRecipe(recipe: RecipeModel) {
+        val favoriteRecipeEntity = FavoriteEntity(recipe.id, Gson().toJson(recipe))
+        repository.deleteFavoriteRecipe(favoriteRecipeEntity)
+    }
+
+    // Fetch favorite recipes from database
+    fun fetchFavoriteRecipes() {
+        repository.getAllFavoriteRecipes().observeForever { favoriteRecipeEntities ->
+            val favoriteRecipeModels = favoriteRecipeEntities.map { entity ->
+                Gson().fromJson(entity.json, RecipeModel::class.java)
+            }
+            _favoriteRecipes.postValue(favoriteRecipeModels)
+        }
     }
 
 }

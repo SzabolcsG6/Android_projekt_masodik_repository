@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageButton
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.core.os.bundleOf
@@ -112,7 +111,7 @@ chooserButton.visibility=View.GONE
                 R.id.sortButton -> {
                     viewModel.getRecipesSortedByRatingDatabase()
                     viewModel.myRecipesList.observe(viewLifecycleOwner) { recipes ->
-                        recipesAdapter.setData(recipes)
+                        recipesAdapter.setData2(recipes)
                         recipesAdapter.notifyDataSetChanged()
                         scrollToTop()
                     }
@@ -121,7 +120,7 @@ chooserButton.visibility=View.GONE
                 R.id.sortButton2 -> {
                     viewModel.getRecipesSortedByRatingAscendingDatabase()
                     viewModel.myRecipesList.observe(viewLifecycleOwner) { recipes ->
-                        recipesAdapter.setData(recipes)
+                        recipesAdapter.setData2(recipes)
                         recipesAdapter.notifyDataSetChanged()
                         scrollToTop()
                     }
@@ -130,7 +129,7 @@ chooserButton.visibility=View.GONE
                 R.id.sortButton3 -> {
                     viewModel.getRecipesSortedByNameDatabase()
                     viewModel.myRecipesList.observe(viewLifecycleOwner) { recipes ->
-                        recipesAdapter.setData(recipes)
+                        recipesAdapter.setData2(recipes)
                         recipesAdapter.notifyDataSetChanged()
                         scrollToTop()
                     }
@@ -139,7 +138,7 @@ chooserButton.visibility=View.GONE
                 R.id.sortButton4 -> {
                     viewModel.getRecipesSortedByNameAscendingDatabase()
                     viewModel.myRecipesList.observe(viewLifecycleOwner) { recipes ->
-                        recipesAdapter.setData(recipes)
+                        recipesAdapter.setData2(recipes)
                         recipesAdapter.notifyDataSetChanged()
                         scrollToTop()
                     }
@@ -160,7 +159,7 @@ chooserButton.visibility=View.GONE
             requireContext(),
             onItemClickListener = { recipe -> navigateToRecipeDetail(recipe) },
            // onItemLongClickListener = { recipe -> viewModel.deleteRecipe(recipe) },
-            onAddToFavoritesClick = {},
+            onAddToFavoritesClick = { recipe -> viewModel.insertFavoriteRecipe(recipe) },
             onDeleteClickListener = { recipe ->
                 // Delete the recipe from the database
                 viewModel.deleteRecipe(recipe)

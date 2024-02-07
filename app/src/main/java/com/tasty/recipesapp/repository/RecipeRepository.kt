@@ -6,7 +6,10 @@ import androidx.lifecycle.LiveData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.tasty.recipesapp.api.RecipeApiClient
+import com.tasty.recipesapp.repository.recipe.FavoriteDatabase
 import com.tasty.recipesapp.repository.recipe.RecipeDatabase
+import com.tasty.recipesapp.repository.recipe.enitity.FavoriteDAO
+import com.tasty.recipesapp.repository.recipe.enitity.FavoriteEntity
 import com.tasty.recipesapp.repository.recipe.enitity.RecipeDAO
 import com.tasty.recipesapp.repository.recipe.enitity.RecipeEntity
 import com.tasty.recipesapp.repository.recipe.enitity.toRecipeModel
@@ -26,17 +29,20 @@ object RecipeRepository {
      //private var myRecipesList: ArrayList<RecipeModel> = ArrayList()
     private lateinit var recipesListLiveData: LiveData<List<RecipeEntity>>
     private val recipeApiClient = RecipeApiClient()
+    private lateinit var favoriteRecipeDao: FavoriteDAO // New addition
+    private lateinit var favoriteRecipesLiveData: LiveData<List<FavoriteEntity>> // New addition
 //database
     //private val _allRecipes = MutableLiveData<List<RecipeEntity>>()
    // val allRecipes: LiveData<List<RecipeEntity>> = _allRecipes
 
 
 
-    fun initialize(recipeDatabase: RecipeDatabase) {
+    fun initialize(recipeDatabase: RecipeDatabase,favoriteDatabase: FavoriteDatabase) {
         this.recipeDatabase = recipeDatabase
         this.recipeDao = recipeDatabase.recipeDao()
         recipesListLiveData = recipeDao.getAllRecipesLiveData()
-
+        this.favoriteRecipeDao = favoriteDatabase.favoriteDao()
+        this.favoriteRecipesLiveData = favoriteRecipeDao.getAllFavorites()
         // Observe changes in recipes list
         recipesListLiveData.observeForever { allRecipes ->
             // You can access allRecipes on the background thread
@@ -106,7 +112,17 @@ object RecipeRepository {
         }
     }
 
+    fun insertFavoriteRecipe(favoriteRecipe: FavoriteEntity) {
+        favoriteRecipeDao.insertFavorite(favoriteRecipe)
+    }
 
+    fun deleteFavoriteRecipe(favoriteRecipe: FavoriteEntity) {
+        favoriteRecipeDao.deleteFavorite(favoriteRecipe)
+    }
+
+    fun getAllFavoriteRecipes(): LiveData<List<FavoriteEntity>> {
+        return favoriteRecipesLiveData
+    }
 
     fun getRecipe(recipeId: Int): RecipeModel? {
         return recipesList.find { it.id == recipeId }
@@ -116,11 +132,6 @@ object RecipeRepository {
         recipeDao.insertRecipe(recipe)
         Log.d("Database-", "Inserted")}
     }
-//    suspend fun deleteRecipe(recipe: RecipeEntity) {
-//        recipeDao.deleteRecipe(recipe)
-//        Log.d("Recipe-", "Deleted")
-//    }
-    //fun getMyRecipes() = myRecipesList
     fun getRecipesSortedByRating(): List<RecipeModel> {
         return recipesList.sortedByDescending { it.userRatings.score }
     }
