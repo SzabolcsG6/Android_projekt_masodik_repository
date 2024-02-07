@@ -100,9 +100,11 @@ object RecipeRepository {
             recipeDao.deleteRecipe(recipeEntity)
         }
     }
-
-
-
+    suspend fun deleteAllRecipes() {
+        withContext(Dispatchers.IO) {
+            recipeDao.deleteAll()
+        }
+    }
 
 
 

@@ -82,6 +82,11 @@ class ProfileViewModel(private val repository: RecipeRepository) : ViewModel() {
             repository.deleteRecipe(recipe)
         }
     }
+    fun deleteAllRecipes(){
+        viewModelScope.launch {
+            repository.deleteAllRecipes()
+        }
+    }
 suspend fun insertRecipeToDatabase(recipe: RecipeEntity) {
     repository.insertRecipeDatabase(recipe)
 }

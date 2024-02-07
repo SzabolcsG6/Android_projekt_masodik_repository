@@ -18,7 +18,8 @@ public interface RecipeDAO {
     @Query("SELECT * FROM recipe")
     fun getAllRecipesLiveData(): LiveData<List<RecipeEntity>>
 
-
+@Query("DELETE FROM recipe")
+fun deleteAll()
 
 
 //    @Query("SELECT * FROM recipe WHERE isFavorite = 1")

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.core.os.bundleOf
@@ -81,14 +82,14 @@ viewModel.myRecipesList
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show()}
 
         viewModel.fetchRecipesFromDatabase()
-
+//viewModel.deleteAllRecipes()
 
         val sortButton: Button = view.findViewById(R.id.sortButton)
         val sortButton2: Button = view.findViewById(R.id.sortButton2)
         val sortButton3: Button = view.findViewById(R.id.sortButton3)
         val sortButton4: Button = view.findViewById(R.id.sortButton4)
         val chooserButton : FloatingActionButton = view.findViewById(R.id.chooserButton)
-//        val favoritesButton: Button = view.findViewById(R.id.favoritesButton)
+//val deleteButton : ImageButton = view.findViewById((R.id.deleteButton))
 
 chooserButton.visibility=View.GONE
         sortButton.visibility = View.GONE
@@ -146,6 +147,9 @@ chooserButton.visibility=View.GONE
             }
         }
       //  viewModel.fetchRecipesFromDatabase()
+//deleteButton.setOnClickListener {
+//    //viewModel.deleteRecipe(recipe)
+//}
     }
 
     private fun initRecyclerView() {

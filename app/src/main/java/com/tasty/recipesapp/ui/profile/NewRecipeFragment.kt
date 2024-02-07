@@ -60,6 +60,7 @@ class NewRecipeFragment : Fragment() {
             val recipeEntity = RecipeEntity(json = jsonString)
             viewModel.viewModelScope.launch {
                 viewModel.insertRecipeToDatabase(recipeEntity)
+                viewModel.fetchRecipesFromDatabase()
                 navigateBack()
 
                 // No need to fetch recipes here since it's already observed
