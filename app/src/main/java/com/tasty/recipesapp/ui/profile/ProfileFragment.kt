@@ -25,6 +25,7 @@ import com.tasty.recipesapp.ui.profile.viewmodel.factory.ProfileViewModelFactory
 import com.tasty.recipesapp.ui.recipe.adapter.RecipesListAdapter
 
 
+
 class ProfileFragment : Fragment() {
 
 
@@ -89,8 +90,9 @@ viewModel.myRecipesList
         val sortButton3: Button = view.findViewById(R.id.sortButton3)
         val sortButton4: Button = view.findViewById(R.id.sortButton4)
         val chooserButton : FloatingActionButton = view.findViewById(R.id.chooserButton)
+        val searchButton : Button = view.findViewById(R.id.searchButton)
 //val deleteButton : ImageButton = view.findViewById((R.id.deleteButton))
-
+searchButton.visibility=View.GONE
 chooserButton.visibility=View.GONE
         sortButton.visibility = View.GONE
         sortButton2.visibility = View.GONE
@@ -162,6 +164,7 @@ chooserButton.visibility=View.GONE
             onDeleteClickListener = { recipe ->
                 // Delete the recipe from the database
                 viewModel.deleteRecipe(recipe)
+
             }
         )
 

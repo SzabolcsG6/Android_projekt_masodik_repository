@@ -21,6 +21,8 @@ class ProfileViewModel(private val repository: RecipeRepository) : ViewModel() {
     val insertResult: LiveData<Boolean> get() = _insertResult
     private val _deleteResult: MutableLiveData<Boolean> = MutableLiveData()
     val deleteResult: LiveData<Boolean> get() = _deleteResult
+    private val _searchResults = MutableLiveData<List<RecipeModel>>()
+    val searchResults: LiveData<List<RecipeModel>> = _searchResults
 
 //display recipes from database
     private val _recipeListLiveData = MutableLiveData<List<RecipeEntity>>()
@@ -35,7 +37,12 @@ class ProfileViewModel(private val repository: RecipeRepository) : ViewModel() {
 //            _myRecipesList.value = myRecipes
 //        }
 //    }
-
+//fun searchRecipes(query: String) {
+//    viewModelScope.launch {
+//        val results = repository.searchRecipes(query)
+//        _searchResults.postValue(results)
+//    }
+//}
     fun fetchRecipesFromDatabase() {
         viewModelScope.launch {
             repository.getAllRecipesFromDatabase().observeForever { recipeEntities ->

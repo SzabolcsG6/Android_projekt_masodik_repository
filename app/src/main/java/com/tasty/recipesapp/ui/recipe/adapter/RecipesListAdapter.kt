@@ -76,7 +76,10 @@ class RecipesListAdapter (
         recipesList.addAll(newList) // Add all elements from the new list
     }
 
-
+//    fun setDataSearch(newRecipes: List<RecipeModel>) {
+//        newRecipes = emptyList<>()
+//        notifyDataSetChanged()
+//    }
     inner class RecipeItemViewHolder(binding: RecipeListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
