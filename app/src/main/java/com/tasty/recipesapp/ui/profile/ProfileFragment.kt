@@ -47,6 +47,7 @@ class ProfileFragment : Fragment() {
         binding.addButton.setOnClickListener {
             navigateToNewRecipe()
         }
+        binding.Favorites.setOnClickListener { navigateToFavoritesList() }
         return binding.root
     }
 
@@ -90,6 +91,7 @@ viewModel.myRecipesList
         val sortButton4: Button = view.findViewById(R.id.sortButton4)
         val chooserButton : FloatingActionButton = view.findViewById(R.id.chooserButton)
         val searchButton : Button = view.findViewById(R.id.searchButton)
+        val favoriteList : FloatingActionButton=view.findViewById(R.id.Favorites)
 //val deleteButton : ImageButton = view.findViewById((R.id.deleteButton))
 searchButton.visibility=View.GONE
 chooserButton.visibility=View.GONE
@@ -191,7 +193,11 @@ chooserButton.visibility=View.GONE
             R.id.action_profileFragment_to_newRecipeFragment
         )
     }
-
+private fun navigateToFavoritesList(){
+    findNavController().navigate(
+        R.id.action_profileFragment_to_favoriteRecipesFragment
+    )
+}
     private fun scrollToTop() {
         binding.recyclerView.scrollToPosition(0) // Scrolls to the top of the RecyclerView
     }

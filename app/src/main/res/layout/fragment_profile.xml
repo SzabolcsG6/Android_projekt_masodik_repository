@@ -16,7 +16,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="188dp"
         app:backgroundTint="#CC0029"
-        android:contentDescription="Add to favorites"
+        android:contentDescription="Favorites List"
         android:scaleType="fitCenter"
         android:src="@drawable/icon_favorite"
         app:layout_constraintEnd_toEndOf="parent"
